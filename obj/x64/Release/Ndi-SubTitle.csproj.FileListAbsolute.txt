@@ -1,0 +1,14 @@
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\bin\x64\Release\Ndi-SubTitle.exe.config
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\bin\x64\Release\Ndi-SubTitle.exe
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\bin\x64\Release\Ndi-SubTitle.pdb
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\bin\x64\Release\NDILibDotNet2.dll
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\bin\x64\Release\NAudio.dll
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\bin\x64\Release\NDILibDotNet2.pdb
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\bin\x64\Release\NAudio.xml
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Release\Ndi_SubTitle.Form1.resources
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Release\Ndi_SubTitle.Properties.Resources.resources
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Release\Ndi-SubTitle.csproj.GenerateResource.cache
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Release\Ndi-SubTitle.csproj.CoreCompileInputs.cache
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Release\Ndi-SubTitle.csproj.CopyComplete
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Release\Ndi-SubTitle.exe
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Release\Ndi-SubTitle.pdb
