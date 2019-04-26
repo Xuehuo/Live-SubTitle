@@ -57,7 +57,7 @@ namespace Ndi_SubTitle
         {
             sender = new Sender("Example", true);
             var videoFrame = new VideoFrame(1920, 180, (32.0f / 3.0f), fps, 1);
-            var bmp = new Bitmap(videoFrame.Width, videoFrame.Height, videoFrame.Stride, System.Drawing.Imaging.PixelFormat.Format32bppPArgb, videoFrame.BufferPtr);
+            var bmp = new Bitmap(videoFrame.Width, videoFrame.Height, videoFrame.Stride, System.Drawing.Imaging.PixelFormat.Format32bppArgb, videoFrame.BufferPtr);
             var graphics = Graphics.FromImage(bmp);
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
             GC.KeepAlive(graphics);
@@ -89,7 +89,7 @@ namespace Ndi_SubTitle
                 //***Render Start***
 
                 // Clear it
-                graphics.Clear(Color.FromArgb(0, 0, 0, 0));
+                graphics.Clear(Color.FromArgb(0,0,0,0));
                 if (Clear)
                 {
                     lock (clear_lock)
@@ -485,6 +485,11 @@ namespace Ndi_SubTitle
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             btn_stop_Click();
+        }
+
+        private void btn_Clear_Fade_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

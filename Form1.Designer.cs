@@ -41,7 +41,7 @@
             this.lb_program = new System.Windows.Forms.Label();
             this.btn_fade = new System.Windows.Forms.Button();
             this.btn_Hard = new System.Windows.Forms.Button();
-            this.btn_Clear = new System.Windows.Forms.Button();
+            this.btn_Clear_Cut = new System.Windows.Forms.Button();
             this.btn_DeleteFile = new System.Windows.Forms.Button();
             this.lst_File = new System.Windows.Forms.ListBox();
             this.lst_SubTitle = new System.Windows.Forms.ListBox();
@@ -49,6 +49,7 @@
             this.lb_Font = new System.Windows.Forms.Label();
             this.cmb_Fonts = new System.Windows.Forms.ComboBox();
             this.btn_Lock_Font = new System.Windows.Forms.Button();
+            this.btn_Clear_Fade = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lb_program_file
@@ -105,7 +106,7 @@
             // 
             this.btn_import.Location = new System.Drawing.Point(12, 94);
             this.btn_import.Name = "btn_import";
-            this.btn_import.Size = new System.Drawing.Size(69, 36);
+            this.btn_import.Size = new System.Drawing.Size(83, 36);
             this.btn_import.TabIndex = 7;
             this.btn_import.Text = "Import";
             this.btn_import.UseVisualStyleBackColor = true;
@@ -113,9 +114,9 @@
             // 
             // btn_Load
             // 
-            this.btn_Load.Location = new System.Drawing.Point(167, 94);
+            this.btn_Load.Location = new System.Drawing.Point(181, 94);
             this.btn_Load.Name = "btn_Load";
-            this.btn_Load.Size = new System.Drawing.Size(97, 36);
+            this.btn_Load.Size = new System.Drawing.Size(83, 36);
             this.btn_Load.TabIndex = 8;
             this.btn_Load.Text = "Load";
             this.btn_Load.UseVisualStyleBackColor = true;
@@ -177,23 +178,23 @@
             this.btn_Hard.Name = "btn_Hard";
             this.btn_Hard.Size = new System.Drawing.Size(141, 65);
             this.btn_Hard.TabIndex = 14;
-            this.btn_Hard.Text = "Hard (Enter)";
+            this.btn_Hard.Text = "Cut (Enter)";
             this.btn_Hard.UseVisualStyleBackColor = true;
             this.btn_Hard.Click += new System.EventHandler(this.btn_Hard_Click);
             // 
-            // btn_Clear
+            // btn_Clear_Cut
             // 
-            this.btn_Clear.Location = new System.Drawing.Point(1113, 521);
-            this.btn_Clear.Name = "btn_Clear";
-            this.btn_Clear.Size = new System.Drawing.Size(309, 76);
-            this.btn_Clear.TabIndex = 15;
-            this.btn_Clear.Text = "Clear (Ctrl+Enter)";
-            this.btn_Clear.UseVisualStyleBackColor = true;
-            this.btn_Clear.Click += new System.EventHandler(this.btn_Clear_Click);
+            this.btn_Clear_Cut.Location = new System.Drawing.Point(1113, 521);
+            this.btn_Clear_Cut.Name = "btn_Clear_Cut";
+            this.btn_Clear_Cut.Size = new System.Drawing.Size(141, 70);
+            this.btn_Clear_Cut.TabIndex = 15;
+            this.btn_Clear_Cut.Text = "Clear (Ctrl+Enter)";
+            this.btn_Clear_Cut.UseVisualStyleBackColor = true;
+            this.btn_Clear_Cut.Click += new System.EventHandler(this.btn_Clear_Click);
             // 
             // btn_DeleteFile
             // 
-            this.btn_DeleteFile.Location = new System.Drawing.Point(87, 94);
+            this.btn_DeleteFile.Location = new System.Drawing.Point(101, 94);
             this.btn_DeleteFile.Name = "btn_DeleteFile";
             this.btn_DeleteFile.Size = new System.Drawing.Size(74, 36);
             this.btn_DeleteFile.TabIndex = 16;
@@ -229,7 +230,7 @@
             // 
             this.lb_Status.AutoSize = true;
             this.lb_Status.ForeColor = System.Drawing.Color.Red;
-            this.lb_Status.Location = new System.Drawing.Point(377, 105);
+            this.lb_Status.Location = new System.Drawing.Point(367, 105);
             this.lb_Status.Name = "lb_Status";
             this.lb_Status.Size = new System.Drawing.Size(63, 15);
             this.lb_Status.TabIndex = 20;
@@ -266,11 +267,22 @@
             this.btn_Lock_Font.UseVisualStyleBackColor = true;
             this.btn_Lock_Font.Click += new System.EventHandler(this.btn_Lock_Font_Click);
             // 
+            // btn_Clear_Fade
+            // 
+            this.btn_Clear_Fade.Location = new System.Drawing.Point(1281, 521);
+            this.btn_Clear_Fade.Name = "btn_Clear_Fade";
+            this.btn_Clear_Fade.Size = new System.Drawing.Size(141, 70);
+            this.btn_Clear_Fade.TabIndex = 25;
+            this.btn_Clear_Fade.Text = "Fade Clear (Ctrl+Space)";
+            this.btn_Clear_Fade.UseVisualStyleBackColor = true;
+            this.btn_Clear_Fade.Click += new System.EventHandler(this.btn_Clear_Fade_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1439, 628);
+            this.Controls.Add(this.btn_Clear_Fade);
             this.Controls.Add(this.btn_Lock_Font);
             this.Controls.Add(this.cmb_Fonts);
             this.Controls.Add(this.lb_Font);
@@ -278,7 +290,7 @@
             this.Controls.Add(this.lst_SubTitle);
             this.Controls.Add(this.lst_File);
             this.Controls.Add(this.btn_DeleteFile);
-            this.Controls.Add(this.btn_Clear);
+            this.Controls.Add(this.btn_Clear_Cut);
             this.Controls.Add(this.btn_Hard);
             this.Controls.Add(this.btn_fade);
             this.Controls.Add(this.lb_program);
@@ -317,7 +329,7 @@
         private System.Windows.Forms.Label lb_program;
         private System.Windows.Forms.Button btn_fade;
         private System.Windows.Forms.Button btn_Hard;
-        private System.Windows.Forms.Button btn_Clear;
+        private System.Windows.Forms.Button btn_Clear_Cut;
         private System.Windows.Forms.Button btn_DeleteFile;
         private System.Windows.Forms.ListBox lst_File;
         private System.Windows.Forms.ListBox lst_SubTitle;
@@ -325,6 +337,7 @@
         private System.Windows.Forms.Label lb_Font;
         private System.Windows.Forms.ComboBox cmb_Fonts;
         private System.Windows.Forms.Button btn_Lock_Font;
+        private System.Windows.Forms.Button btn_Clear_Fade;
     }
 }
 
