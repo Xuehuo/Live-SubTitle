@@ -1,3 +1,4 @@
 # vs bin files
 
-/[Bb]in/*
+bin/*
+Bin/*
