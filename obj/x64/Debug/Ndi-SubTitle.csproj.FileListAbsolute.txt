@@ -1,0 +1,12 @@
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Debug\Ndi-SubTitle.csprojAssemblyReference.cache
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Debug\Ndi_SubTitle.Form1.resources
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Debug\Ndi_SubTitle.Properties.Resources.resources
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Debug\Ndi-SubTitle.csproj.GenerateResource.cache
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Debug\Ndi-SubTitle.csproj.CoreCompileInputs.cache
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\bin\x64\Debug\Ndi-SubTitle.exe.config
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\bin\x64\Debug\Ndi-SubTitle.exe
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\bin\x64\Debug\Ndi-SubTitle.pdb
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\bin\x64\Debug\NDILibDotNet2x64.dll
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Debug\Ndi-SubTitle.csproj.CopyComplete
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Debug\Ndi-SubTitle.exe
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Debug\Ndi-SubTitle.pdb
