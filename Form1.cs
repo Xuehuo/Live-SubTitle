@@ -28,9 +28,7 @@ namespace Ndi_SubTitle
         private Dictionary<string, string> ST_Files = new Dictionary<string, string>();
         private string Using_FilePath;
         private string Selected_FilePath;
-
         private List<SubTitle> subTitles = new List<SubTitle>();
-        Graphics lst_ST_Color;
 
         // it means which SubTitle is being programed
         int run_printer = 0;
@@ -43,7 +41,6 @@ namespace Ndi_SubTitle
         #region Form
         private void Form1_Load(object sender, EventArgs e)
         {
-            lst_ST_Color = lst_SubTitle.CreateGraphics();
             using (InstalledFontCollection fontsCollection = new InstalledFontCollection())
             {
                 FontFamily[] fontFamilies = fontsCollection.Families;
@@ -349,5 +346,6 @@ namespace Ndi_SubTitle
             Renderer.Cut(SubTitle.Empty);
         }
         #endregion
+
     }
 }
