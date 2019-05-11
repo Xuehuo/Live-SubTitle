@@ -19,3 +19,8 @@ So you don't need to use Linear Key OR Luma Key if you send NDI to Wirecast or a
 - **Blank Line(s)** between two lines will be a **Empty** SubTitle, You can use this to separate two section
 
 
+
+## TODO
+- Add Config File
+- Remember Last Open
+- Direct Output via Unity
