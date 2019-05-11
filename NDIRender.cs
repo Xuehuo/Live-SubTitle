@@ -1,5 +1,4 @@
-﻿using NewTek;
-using NewTek.NDI;
+﻿using NewTek.NDI;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;

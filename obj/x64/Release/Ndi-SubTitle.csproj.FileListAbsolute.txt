@@ -12,3 +12,4 @@ D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Release\Ndi-SubTitle.csproj.CoreCo
 D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Release\Ndi-SubTitle.csproj.CopyComplete
 D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Release\Ndi-SubTitle.exe
 D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Release\Ndi-SubTitle.pdb
+D:\Projects\Ndi-SubTitle\Ndi-SubTitle\obj\x64\Release\Ndi-SubTitle.csprojAssemblyReference.cache

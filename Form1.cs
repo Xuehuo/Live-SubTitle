@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NewTek;
-using NewTek.NDI;
-using NewTek.NDI.WPF;
 using System.Threading;
 using System.IO;
-using System.Drawing.Drawing2D;
-using System.Diagnostics;
 using System.Drawing.Text;
 
 namespace Ndi_SubTitle
@@ -52,31 +43,33 @@ namespace Ndi_SubTitle
             }
             cmb_Fonts.SelectedIndex = 1;
         }
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            e.SuppressKeyPress = false;
-            if (e.KeyCode == Keys.Space)       // Fade
-            {
-                btn_fade_Click();
+            if (keyData == (Keys.Control | Keys.Space))
+            {   //Fade to Blank
+                Console.WriteLine("ShortCut: Ctrl + Space");
+                btn_Clear_Fade_Click();
+                return true;
             }
-            else if (e.KeyCode == Keys.Enter && e.Modifiers == Keys.Control)
-            {
+            else if (keyData == (Keys.Control | Keys.Enter))
+            {   //Cut to Blank
+                Console.WriteLine("ShortCut: Ctrl + Enter");
                 btn_Clear_Click();
+                return true;
             }
-            else if (e.KeyCode == Keys.Enter)   // Hard
-            {
+            else if (keyData == Keys.Space)
+            {   // Fade
+                Console.WriteLine("ShortCut: Space");
+                btn_fade_Click();
+                return true;
+            }
+            else if (keyData == Keys.Enter)
+            {   //fade to blank
+                Console.WriteLine("ShortCut: Enter");
                 btn_Hard_Click();
+                return true;
             }
-            else if (e.KeyCode == Keys.Up)
-            {
-                if (lst_SubTitle.SelectedIndex - 1 >= 0)
-                    lst_SubTitle.SelectedIndex = lst_SubTitle.SelectedIndex - 1;
-            }
-            else if (e.KeyCode == Keys.Down)
-            {
-                if (lst_SubTitle.SelectedIndex > 0 && lst_SubTitle.SelectedIndex + 1 <= lst_SubTitle.Items.Count)
-                    lst_SubTitle.SelectedIndex = lst_SubTitle.SelectedIndex + 1;
-            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -294,7 +287,7 @@ namespace Ndi_SubTitle
         #endregion
 
         #region Change Buttons
-        private void btn_Clear_Fade_Click(object sender, EventArgs e)
+        private void btn_Clear_Fade_Click(object sender = null, EventArgs e = null)
         {
             if (Renderer == null)
                 return;
