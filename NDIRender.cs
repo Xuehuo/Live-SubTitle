@@ -6,14 +6,14 @@ using System.Threading;
 using System.Threading.Tasks;
 
 
-namespace Ndi_SubTitle
+namespace NDI_SubTitle
 {
     public class NDIRender
     {
         public const int Alpha_Max = 255;
         public const int Alpha_Min = 255;
 
-        private static Object syncLock = new Object();
+        private static readonly object syncLock = new object();
         private readonly CancellationToken cancellationToken;
 
         private readonly VideoFrame videoFrame;
@@ -31,14 +31,14 @@ namespace Ndi_SubTitle
         private int Fading_X;
         private readonly int delta_X;
 
-        public NDIRender(CancellationToken cancellationToken, Font font)
+        public NDIRender(CancellationToken cancellationToken, NDIConfig config, Font font)
         {
             this.cancellationToken = cancellationToken;
 
             // We are going to create a 1920x180 frame at 50p, progressive (default).
-            this.videoFrame = new VideoFrame(1920, 180, (32.0f / 3.0f), 50, 1);
+            this.videoFrame = new VideoFrame(config.NDI_width, config.NDI_height, config.aspectRatio, config.frameRateNumerator, config.frameRateDenominator);
             bmp = new Bitmap(videoFrame.Width, videoFrame.Height, videoFrame.Stride,
-                System.Drawing.Imaging.PixelFormat.Format32bppPArgb, videoFrame.BufferPtr);
+                System.Drawing.Imaging.PixelFormat.Format32bppArgb, videoFrame.BufferPtr);
             graphics = Graphics.FromImage(bmp);
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
             // NDI Renderer
@@ -46,15 +46,15 @@ namespace Ndi_SubTitle
             fading = SubTitle.Empty;
 
             // Style
-            defaultBrush = new SolidBrush(Color.White);
+            defaultBrush = new SolidBrush(config.Default_Color);
             this.font = font;
 
             // Fade Setting
             isFading = false;
             // For delta_X, We plus delta_X into alpha
             // Fade Effect will last for 500ms 
-            // So every frame it will change 255/25frames = 10
-            delta_X = Alpha_Max / 25;
+            // So every frame it will change 255/(50frames/2steps) = 10
+            delta_X = Alpha_Max / (config.frameRateNumerator / config.frameRateDenominator) * 2;
 
             // If Fading_X <  Alpha_Max / 2 ,it's the former part (from program to empty)
             // If Fading_X >= Alpha_Max / 2 ,it's the latter part (from empty to fading )
@@ -84,7 +84,7 @@ namespace Ndi_SubTitle
                 Fading_X = 0; //Reset Fading_X
             }
         }
-        
+
         public void ChangeFont(Font font)
         {
             lock (syncLock)

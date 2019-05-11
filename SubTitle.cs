@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ndi_SubTitle
+namespace NDI_SubTitle
 {
     public class SubTitle
     {

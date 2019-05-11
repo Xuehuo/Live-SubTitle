@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace Ndi_SubTitle
+namespace NDI_SubTitle
 {
     public class GetTxtEncoding
     {

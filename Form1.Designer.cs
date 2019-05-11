@@ -1,4 +1,4 @@
-﻿namespace Ndi_SubTitle
+﻿namespace NDI_SubTitle
 {
     partial class Form1
     {

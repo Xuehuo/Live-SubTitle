@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
 
-namespace Ndi_SubTitle
+namespace NDI_SubTitle
 {
     static class Program
     {

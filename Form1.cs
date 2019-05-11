@@ -6,8 +6,9 @@ using System.Windows.Forms;
 using System.Threading;
 using System.IO;
 using System.Drawing.Text;
+using Newtonsoft.Json.Linq;
 
-namespace Ndi_SubTitle
+namespace NDI_SubTitle
 {
     public partial class Form1 : Form
     {
@@ -26,12 +27,16 @@ namespace Ndi_SubTitle
 
         SubTitle Previewing = SubTitle.Empty;
 
+        JObject Config;
+        NDIConfig NDI_Config;
         NDIRender Renderer;
         CancellationTokenSource cancelNDI;
+        float Font_Size;
 
         #region Form
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Init Fonts
             using (InstalledFontCollection fontsCollection = new InstalledFontCollection())
             {
                 FontFamily[] fontFamilies = fontsCollection.Families;
@@ -42,6 +47,27 @@ namespace Ndi_SubTitle
                 }
             }
             cmb_Fonts.SelectedIndex = 1;
+            // Read Config
+            var config_path = Path.Combine(Directory.GetCurrentDirectory(), "NDI-SubTitle.config");
+            try
+            {
+                Config = JObject.Parse(File.ReadAllText(config_path));
+                if (Config.ContainsKey("NDI"))
+                    NDI_Config = NDIConfig.ReadNDIConfig(Config["NDI"] as JObject);
+                else
+                    NDI_Config = new NDIConfig(true);
+                if (Config.ContainsKey("Font-Size"))
+                    Font_Size = Convert.ToSingle(Config["Font-Size"].ToString());
+                else
+                    Font_Size = 50;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Reading Config File Failed");
+                Console.WriteLine(ex.ToString());
+                NDI_Config = new NDIConfig(true);
+                Font_Size = 50;
+            }
         }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -95,7 +121,7 @@ namespace Ndi_SubTitle
                     i--;
                 }
             while (string.IsNullOrWhiteSpace(lines[lines.Count - 1]))
-                lines.RemoveAt(lines.Count - 1); 
+                lines.RemoveAt(lines.Count - 1);
             // Clean Blank Lines in the bottom of txt
 
             var lst = new List<SubTitle>();
@@ -144,7 +170,7 @@ namespace Ndi_SubTitle
             if (Renderer != null)
                 return;
             cancelNDI = new CancellationTokenSource();
-            Renderer = new NDIRender(cancelNDI.Token, new Font(new FontFamily("Arial"), 50));
+            Renderer = new NDIRender(cancelNDI.Token, NDI_Config, new Font(new FontFamily(cmb_Fonts.SelectedItem.ToString()), Font_Size));
             Task.Run(async () => await Renderer.Run());
             lb_Status.ForeColor = Color.Green;
             lb_Status.Text = "NDI On";
@@ -250,7 +276,7 @@ namespace Ndi_SubTitle
                 Console.WriteLine("Change Font To " + cmb.SelectedItem.ToString());
                 //Render_Font = new Font(new FontFamily(cmb.SelectedItem.ToString()), 50);
                 if (Renderer != null)
-                    Renderer.ChangeFont(new Font(new FontFamily(cmb.SelectedItem.ToString()), 50));
+                    Renderer.ChangeFont(new Font(new FontFamily(cmb.SelectedItem.ToString()), Font_Size));
             }
         }
 
