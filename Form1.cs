@@ -79,39 +79,26 @@ namespace Ndi_SubTitle
 
         private List<SubTitle> GenerateSubTitles(string filePath)
         {
-            /* 
-        counter = 1
-        file_counter = 1
-        while True:
-        if counter > len(subList):
-        break
-        ## 创建新图片
-        subString1 = subList[counter-1]
-        if len(subList) == counter:
-        subString2 = ""
-        else:
-        subString2 = subList[counter]
-        if subString2.strip() is "":
-        counter -= 1
-        if subString1.strip() is "":
-        counter -= 1
-        subString1 = ""
-        subString2 = ""
-        file_counter += 1
-        counter += 2
-        */
 
             List<string> lines;
             try { lines = new List<string>(File.ReadAllLines(filePath, GetTxtEncoding.GetType(filePath))); }
             catch (Exception e)
             {
-                Console.WriteLine("ERROR!!!!");
+                Console.WriteLine("!!!!Error When Reading SubTitle File");
                 Console.WriteLine(e.ToString());
                 return new List<SubTitle>();
             }
+            for (int i = 0; i < lines.Count - 1; i++)
+                if (string.IsNullOrWhiteSpace(lines[i]) && string.IsNullOrWhiteSpace(lines[i + 1]))
+                {
+                    lines.RemoveAt(i);
+                    i--;
+                }
             while (string.IsNullOrWhiteSpace(lines[lines.Count - 1]))
-                lines.RemoveAt(lines.Count - 1);
-            List<SubTitle> lst = new List<SubTitle>();
+                lines.RemoveAt(lines.Count - 1); 
+            // Clean Blank Lines in the bottom of txt
+
+            var lst = new List<SubTitle>();
             lst.Add(new SubTitle(0, "", ""));
             int counter = 1;
             int file_counter = 1;
