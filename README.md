@@ -22,6 +22,6 @@ So you don't need to use Linear Key OR Luma Key if you send NDI to Wirecast or a
 
 
 ## TODO
-- Add Config File
+- ~~Add Config File~~
 - Remember Last Open
-- Direct Output via Unity
+- Direct Output via Unity or DirectX
