@@ -203,6 +203,7 @@ namespace NDI_SubTitle
 
         private void btn_import_Click(object sender, EventArgs e)
         {
+            Thread.CurrentThread.SetApartmentState(ApartmentState.STA);
             var ofd = new OpenFileDialog();
             //   ofd.Reset();
             ofd.Filter = "Txt File (*.txt)|*.txt|All Files|*.*";
@@ -225,6 +226,7 @@ namespace NDI_SubTitle
                     }
                 }
             }
+            ofd.Dispose();
         }
 
         private void lst_File_SelectedIndexChanged(object sender, EventArgs e)
@@ -324,5 +326,33 @@ namespace NDI_SubTitle
         }
         #endregion
 
+        private void Lst_File_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.All;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void Lst_File_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] s = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+
+            foreach (string filePath in s)
+            {
+                Console.WriteLine(filePath);
+                if (File.Exists(filePath))
+                {
+                    if (Path.GetExtension(filePath) != ".txt")
+                        continue;
+                    string fileName = Path.GetFileName(filePath);
+                    if (!lst_File.Items.Contains(fileName))
+                    {
+                        lst_File.Items.Add(fileName);
+                        ST_Files.Add(fileName, filePath);
+                    }
+                }
+            }
+        }
     }
 }

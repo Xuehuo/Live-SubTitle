@@ -212,6 +212,7 @@
             // 
             // lst_File
             // 
+            this.lst_File.AllowDrop = true;
             this.lst_File.FormattingEnabled = true;
             this.lst_File.ItemHeight = 15;
             this.lst_File.Location = new System.Drawing.Point(12, 136);
@@ -220,6 +221,8 @@
             this.lst_File.Size = new System.Drawing.Size(252, 484);
             this.lst_File.TabIndex = 17;
             this.lst_File.SelectedIndexChanged += new System.EventHandler(this.lst_File_SelectedIndexChanged);
+            this.lst_File.DragDrop += new System.Windows.Forms.DragEventHandler(this.Lst_File_DragDrop);
+            this.lst_File.DragEnter += new System.Windows.Forms.DragEventHandler(this.Lst_File_DragEnter);
             // 
             // lst_SubTitle
             // 
@@ -322,8 +325,6 @@
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            //this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            // override protected method `ProcessCmdKey`
             this.ResumeLayout(false);
             this.PerformLayout();
 
