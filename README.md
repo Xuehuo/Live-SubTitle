@@ -18,7 +18,8 @@ So you don't need to use Linear Key OR Luma Key if you send NDI to Wirecast or a
 ## Input File Format
 - Only Support **txt** Format
 - Separate two lines into a group(SubTitle), They will show meanwhile
-- **Blank Line(s)** between two lines will be a **Empty** SubTitle, You can use this to separate two section
+- 依次分割第1,2行、3,4行为一组，以此类推
+- 中间的空格不删
 
 
 ## TODO
