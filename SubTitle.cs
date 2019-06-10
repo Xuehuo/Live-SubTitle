@@ -28,7 +28,7 @@ namespace NDI_SubTitle
         public string ToString(bool double_line = false)
         {
             if (double_line)
-                return $"{First_Sub} \n {Second_Sub}";
+                return $"{First_Sub}\n{Second_Sub}";
             return $"{id.ToString()} {First_Sub} {Second_Sub}";
         }
 

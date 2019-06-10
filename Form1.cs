@@ -61,7 +61,7 @@ namespace NDI_SubTitle
                 else
                     Font_Size = 50;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Reading Config File Failed");
                 Console.WriteLine(ex.ToString());
@@ -114,42 +114,13 @@ namespace NDI_SubTitle
                 Console.WriteLine(e.ToString());
                 return new List<SubTitle>();
             }
-            for (int i = 0; i < lines.Count - 1; i++)
-                if (string.IsNullOrWhiteSpace(lines[i]) && string.IsNullOrWhiteSpace(lines[i + 1]))
-                {
-                    lines.RemoveAt(i);
-                    i--;
-                }
-            while (string.IsNullOrWhiteSpace(lines[lines.Count - 1]))
-                lines.RemoveAt(lines.Count - 1);
-            // Clean Blank Lines in the bottom of txt
-
             var lst = new List<SubTitle>();
             lst.Add(new SubTitle(0, "", ""));
-            int counter = 1;
-            int file_counter = 1;
-            while (true)
-            {
-                if (counter > lines.Count)
-                    break;
-                string sub1 = lines[counter - 1];
-                string sub2 = "";
-                if (counter == lines.Count)
-                    sub2 = "";
-                else
-                    sub2 = lines[counter];
-                if (sub2.Trim() == "")
-                    counter -= 1;
-                if (sub1.Trim() == "")
-                {
-                    counter -= 1;
-                    sub1 = "";
-                    sub2 = "";
-                }
-                lst.Add(new SubTitle(file_counter, sub1, sub2));
-                file_counter++;
-                counter += 2;
-            }
+            if (lines.Count % 2 == 1)
+                lines.Add("\r\n");
+            for (int i = 0; i < lines.Count - 1; i += 2)
+                lst.Add(new SubTitle(i / 2 + 1, lines[i], lines[i + 1]));
+            lst.Add(new SubTitle(lines.Count / 2 + 1, "", ""));
             return lst;
         }
 
