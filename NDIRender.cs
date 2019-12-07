@@ -40,7 +40,7 @@ namespace NDI_SubTitle
             bmp = new Bitmap(videoFrame.Width, videoFrame.Height, videoFrame.Stride,
                 System.Drawing.Imaging.PixelFormat.Format32bppArgb, videoFrame.BufferPtr);
             graphics = Graphics.FromImage(bmp);
-            graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            graphics.SmoothingMode = SmoothingMode.HighQuality;
             // NDI Renderer
             program = SubTitle.Empty;
             fading = SubTitle.Empty;

@@ -7,6 +7,7 @@ using System.Threading;
 using System.IO;
 using System.Drawing.Text;
 using Newtonsoft.Json.Linq;
+using OpenTK;
 
 namespace NDI_SubTitle
 {
@@ -17,6 +18,15 @@ namespace NDI_SubTitle
             InitializeComponent();
         }
 
+        //Render Mode
+        enum RenderMode
+        {
+            NDI = 0,
+            FullScreen = 1
+        }
+        RenderMode render_mode = RenderMode.FullScreen; //Default
+
+        // SubTitles
         private Dictionary<string, string> ST_Files = new Dictionary<string, string>();
         private string Using_FilePath;
         private string Selected_FilePath;
@@ -32,6 +42,12 @@ namespace NDI_SubTitle
         NDIRender Renderer;
         CancellationTokenSource cancelNDI;
         float Font_Size;
+
+
+        //Screen Output
+        DisplayDevice display_screen = null;
+        int scn_height, scn_width = 0;
+        Render_Form render_form = null;
 
         #region Form
         private void Form1_Load(object sender, EventArgs e)
@@ -100,6 +116,7 @@ namespace NDI_SubTitle
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             btn_stop_Click();
+            Close_Screen();
         }
         #endregion
 
@@ -275,10 +292,19 @@ namespace NDI_SubTitle
         #region Change Buttons
         private void btn_Clear_Fade_Click(object sender = null, EventArgs e = null)
         {
-            if (Renderer == null)
-                return;
-            Renderer.Fade(SubTitle.Empty);
-            Program(SubTitle.Empty);
+            if (render_mode == RenderMode.NDI)
+            {
+                if (Renderer == null)
+                    return;
+                Renderer.Fade(SubTitle.Empty);
+                Program(SubTitle.Empty);
+            }
+            if(render_mode == RenderMode.FullScreen)
+            {
+                if (render_form == null)
+                    return;
+
+            }
         }
 
         private void btn_fade_Click(object sender = null, EventArgs e = null)  //Fade
@@ -354,5 +380,75 @@ namespace NDI_SubTitle
                 }
             }
         }
+
+        private void btn_refresh_monitor_Click(object sender, EventArgs e)
+        {
+            Refresh_Monitors();
+        }
+
+        private void Refresh_Monitors()
+        {
+            if (true) //unlocked
+            {
+                cmb_monitor.Items.Clear();
+                int id = 0;
+                foreach (var screen in Screen.AllScreens)
+                {
+                    // For each screen, add the screen properties to a list box.
+                    cmb_monitor.Items.Add($"{id}:{screen.DeviceName}");
+                    id++;
+                }
+            }
+        }
+
+        // TODO: Add lock
+        private void btn_scnStart_Click(object sender, EventArgs e)
+        {
+            if (true) //has locked
+            {
+                render_form = new Render_Form(display_screen, scn_width, scn_height);
+                render_form.Run(50.0f, 50.0f);
+            }
+        }
+
+        void Close_Screen()
+        {
+            if (render_form != null)
+            {
+                render_form.Close();
+                render_form.Dispose();
+                render_form = null;
+            }
+        }
+
+        private void btn_ScnStop_Click(object sender, EventArgs e)
+        {
+            var ds = MessageBox.Show("Close Output Screen?!!!!", "ARE YOU SURE??", MessageBoxButtons.YesNo);
+            if (ds == DialogResult.Yes)
+                Close_Screen();
+        }
+
+        private void rdo_Render_NDI_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdo_Render_FullScreen.Checked) render_mode = RenderMode.NDI;
+        }
+
+        private void rdo_Render_FullScreen_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdo_Render_FullScreen.Checked) render_mode = RenderMode.FullScreen;
+
+        }
+
+        // TODO: Add lock
+        private void btn_lock_screen_Click(object sender, EventArgs e)
+        {
+            int id = cmb_monitor.SelectedIndex;
+            Screen scn = Screen.AllScreens[id];
+            //lb_screen_info.Text = $"Name:{scn.DeviceName}  Bits:{scn.BitsPerPixel}";
+            display_screen = DisplayDevice.GetDisplay((DisplayIndex)id);
+            scn_height = Convert.ToInt32(txt_screen_height.Text);
+            scn_width = Convert.ToInt32(txt_screen_width.Text);
+        }
+
     }
 }
