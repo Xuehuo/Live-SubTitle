@@ -167,11 +167,8 @@ namespace NDI_SubTitle
                     else
                     {
                         // We now submit the frame. Note that this call will be clocked so that we end up submitting at exactly 29.97fps.
-                        lock (syncLock)
-                        {
-                            DrawFrame();
-                            sendInstance.Send(videoFrame);
-                        }
+                        DrawFrame();
+                        sendInstance.Send(videoFrame);
                     }
                 } // using sendInstance
                 sendInstance.Dispose();

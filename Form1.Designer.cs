@@ -62,8 +62,8 @@
             this.btn_ScnStop = new System.Windows.Forms.Button();
             this.btn_scnStart = new System.Windows.Forms.Button();
             this.gp_render_mode = new System.Windows.Forms.GroupBox();
-            this.rdo_Render_NDI = new System.Windows.Forms.RadioButton();
             this.rdo_Render_FullScreen = new System.Windows.Forms.RadioButton();
+            this.rdo_Render_NDI = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gp_render_mode.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -221,6 +221,7 @@
             // 
             // cmb_monitor
             // 
+            this.cmb_monitor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_monitor.FormattingEnabled = true;
             resources.ApplyResources(this.cmb_monitor, "cmb_monitor");
             this.cmb_monitor.Name = "cmb_monitor";
@@ -280,13 +281,6 @@
             this.gp_render_mode.Name = "gp_render_mode";
             this.gp_render_mode.TabStop = false;
             // 
-            // rdo_Render_NDI
-            // 
-            resources.ApplyResources(this.rdo_Render_NDI, "rdo_Render_NDI");
-            this.rdo_Render_NDI.Name = "rdo_Render_NDI";
-            this.rdo_Render_NDI.UseVisualStyleBackColor = true;
-            this.rdo_Render_NDI.CheckedChanged += new System.EventHandler(this.rdo_Render_NDI_CheckedChanged);
-            // 
             // rdo_Render_FullScreen
             // 
             resources.ApplyResources(this.rdo_Render_FullScreen, "rdo_Render_FullScreen");
@@ -295,6 +289,13 @@
             this.rdo_Render_FullScreen.TabStop = true;
             this.rdo_Render_FullScreen.UseVisualStyleBackColor = true;
             this.rdo_Render_FullScreen.CheckedChanged += new System.EventHandler(this.rdo_Render_FullScreen_CheckedChanged);
+            // 
+            // rdo_Render_NDI
+            // 
+            resources.ApplyResources(this.rdo_Render_NDI, "rdo_Render_NDI");
+            this.rdo_Render_NDI.Name = "rdo_Render_NDI";
+            this.rdo_Render_NDI.UseVisualStyleBackColor = true;
+            this.rdo_Render_NDI.CheckedChanged += new System.EventHandler(this.rdo_Render_NDI_CheckedChanged);
             // 
             // groupBox1
             // 
