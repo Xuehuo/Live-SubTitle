@@ -7,6 +7,7 @@ using System.Threading;
 using System.IO;
 using System.Drawing.Text;
 using Newtonsoft.Json.Linq;
+using OpenTK;
 
 namespace NDI_SubTitle
 {
@@ -17,6 +18,15 @@ namespace NDI_SubTitle
             InitializeComponent();
         }
 
+        //Render Mode
+        enum RenderMode
+        {
+            NDI = 0,
+            FullScreen = 1
+        }
+        RenderMode render_mode = RenderMode.FullScreen; //Default
+
+        // SubTitles
         private Dictionary<string, string> ST_Files = new Dictionary<string, string>();
         private string Using_FilePath;
         private string Selected_FilePath;
@@ -33,6 +43,12 @@ namespace NDI_SubTitle
         CancellationTokenSource cancelNDI;
         float Font_Size;
 
+
+        //Screen Output
+        DisplayDevice display_screen = null;
+        int scn_height, scn_width = 0;
+        Render_Form render_form = null;
+
         #region Form
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -47,6 +63,7 @@ namespace NDI_SubTitle
                 }
             }
             cmb_Fonts.SelectedIndex = 1;
+            Refresh_Monitors();
             // Read Config
             var config_path = Path.Combine(Directory.GetCurrentDirectory(), "NDI-SubTitle.config");
             try
@@ -100,6 +117,7 @@ namespace NDI_SubTitle
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             btn_stop_Click();
+            Close_Screen();
         }
         #endregion
 
@@ -248,7 +266,12 @@ namespace NDI_SubTitle
             {
                 Console.WriteLine("Change Font To " + cmb.SelectedItem.ToString());
                 //Render_Font = new Font(new FontFamily(cmb.SelectedItem.ToString()), 50);
-                if (Renderer != null)
+                if (render_mode == RenderMode.FullScreen)
+                {
+                    if (render_form != null)
+                        render_form.ChangeFont(new Font(new FontFamily(cmb.SelectedItem.ToString()), Font_Size));
+                }
+                else if (Renderer != null)
                     Renderer.ChangeFont(new Font(new FontFamily(cmb.SelectedItem.ToString()), Font_Size));
             }
         }
@@ -275,10 +298,19 @@ namespace NDI_SubTitle
         #region Change Buttons
         private void btn_Clear_Fade_Click(object sender = null, EventArgs e = null)
         {
-            if (Renderer == null)
-                return;
-            Renderer.Fade(SubTitle.Empty);
-            Program(SubTitle.Empty);
+            if (render_mode == RenderMode.NDI)
+            {
+                if (Renderer == null)
+                    return;
+                Renderer.Fade(SubTitle.Empty);
+                Program(SubTitle.Empty);
+            }
+            if (render_mode == RenderMode.FullScreen)
+            {
+                if (render_form == null)
+                    return;
+
+            }
         }
 
         private void btn_fade_Click(object sender = null, EventArgs e = null)  //Fade
@@ -301,14 +333,24 @@ namespace NDI_SubTitle
 
         private void btn_Hard_Click(object sender = null, EventArgs e = null)//Send Directly Preview To Program
         {
-            if (Renderer == null)
-                return;
+
             if (subTitles.Count == 0)
                 return;
-            if (lst_SubTitle.SelectedIndex < 0)
+            if (lst_SubTitle.SelectedIndex < 0 || subTitles.Count <= lst_SubTitle.SelectedIndex)
                 return;
-            if (subTitles.Count > lst_SubTitle.SelectedIndex)
+            if (render_mode == RenderMode.FullScreen)
             {
+                if (render_form == null) return;
+                render_form.Cut(Previewing);
+                Program(Previewing);
+                run_printer = Previewing.id + 1;
+                if (run_printer != subTitles.Count)
+                    lst_SubTitle.SetSelected(run_printer, true);
+            }
+            else
+            {
+                if (Renderer == null)
+                    return;
                 Renderer.Cut(Previewing);
                 Program(Previewing);
                 run_printer = Previewing.id + 1;
@@ -319,10 +361,11 @@ namespace NDI_SubTitle
 
         private void btn_Clear_Click(object sender = null, EventArgs e = null)
         {
-            if (Renderer == null)
-                return;
             Program(SubTitle.Empty);
-            Renderer.Cut(SubTitle.Empty);
+            if (Renderer != null)
+                Renderer.Cut(SubTitle.Empty);
+            if (render_form != null)
+                render_form.Cut(SubTitle.Empty);
         }
         #endregion
 
@@ -354,5 +397,94 @@ namespace NDI_SubTitle
                 }
             }
         }
+
+        private void btn_refresh_monitor_Click(object sender, EventArgs e)
+        {
+            Refresh_Monitors();
+        }
+
+        private void Refresh_Monitors()
+        {
+            if (cmb_monitor.Enabled == true) //unlocked
+            {
+                cmb_monitor.Items.Clear();
+                int id = 0;
+                foreach (var screen in Screen.AllScreens)
+                {
+                    // For each screen, add the screen properties to a list box.
+                    cmb_monitor.Items.Add($"{id}:{screen.DeviceName}");
+                    id++;
+                }
+                if (cmb_monitor.Items.Count >= 1)
+                    cmb_monitor.SelectedIndex = cmb_monitor.Items.Count - 1;
+            }
+        }
+
+        private void btn_scnStart_Click(object sender, EventArgs e)
+        {
+            if (cmb_monitor.Enabled == false) //has locked
+            {
+                render_form = new Render_Form(display_screen, scn_width, scn_height, new Font(new FontFamily(cmb_Fonts.SelectedItem.ToString()), Font_Size), NDI_Config);
+                render_form.Run(50.0f, 50.0f);
+            }
+            else
+            {
+                MessageBox.Show("Lock Output Screen!");
+            }
+        }
+
+        void Close_Screen()
+        {
+            if (render_form != null)
+            {
+                render_form.Close();
+                render_form.Dispose();
+                render_form = null;
+            }
+        }
+
+        private void btn_ScnStop_Click(object sender, EventArgs e)
+        {
+            var ds = MessageBox.Show("Close Output Screen?!!!!", "ARE YOU SURE??", MessageBoxButtons.YesNo);
+            if (ds == DialogResult.Yes)
+                Close_Screen();
+        }
+
+        private void rdo_Render_NDI_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdo_Render_NDI.Checked) render_mode = RenderMode.NDI;
+        }
+
+        private void rdo_Render_FullScreen_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdo_Render_FullScreen.Checked) render_mode = RenderMode.FullScreen;
+
+        }
+
+        // TODO: Add lock
+        private void btn_lock_screen_Click(object sender, EventArgs e)
+        {
+            if (cmb_monitor.Enabled == true) //not locked
+            {
+                int id = cmb_monitor.SelectedIndex;
+                if (id == -1)
+                    return;
+                Screen scn = Screen.AllScreens[id];
+                //lb_screen_info.Text = $"Name:{scn.DeviceName}  Bits:{scn.BitsPerPixel}";
+                display_screen = DisplayDevice.GetDisplay((DisplayIndex)id);
+                scn_height = Convert.ToInt32(txt_screen_height.Text);
+                scn_width = Convert.ToInt32(txt_screen_width.Text);
+                cmb_monitor.Enabled = false;
+                btn_lock_screen.Text = "Locked";
+                btn_lock_screen.ForeColor = Color.Green;
+            }
+            else
+            {
+                cmb_monitor.Enabled = true;
+                btn_lock_screen.Text = "Unlocked";
+                btn_lock_screen.ForeColor = Color.Red;
+            }
+        }
+
     }
 }

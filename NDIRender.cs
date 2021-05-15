@@ -40,7 +40,7 @@ namespace NDI_SubTitle
             bmp = new Bitmap(videoFrame.Width, videoFrame.Height, videoFrame.Stride,
                 System.Drawing.Imaging.PixelFormat.Format32bppArgb, videoFrame.BufferPtr);
             graphics = Graphics.FromImage(bmp);
-            graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            graphics.SmoothingMode = SmoothingMode.HighQuality;
             // NDI Renderer
             program = SubTitle.Empty;
             fading = SubTitle.Empty;
@@ -167,11 +167,8 @@ namespace NDI_SubTitle
                     else
                     {
                         // We now submit the frame. Note that this call will be clocked so that we end up submitting at exactly 29.97fps.
-                        lock (syncLock)
-                        {
-                            DrawFrame();
-                            sendInstance.Send(videoFrame);
-                        }
+                        DrawFrame();
+                        sendInstance.Send(videoFrame);
                     }
                 } // using sendInstance
                 sendInstance.Dispose();
