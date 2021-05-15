@@ -2,6 +2,11 @@
 
 A Tool Using NDI To Make SubTitle In Live Production
 
+### This project will no longer update and offer support as we have found a better solution to the problem.
+
+## Develpoing
+- Use openTK to show subtitles directly via other screen
+- almost done!
 
 ## Download
 - [Release Page](https://github.com/luvletter1205/NDI-SubTitle/releases)
