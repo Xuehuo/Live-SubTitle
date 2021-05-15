@@ -31,12 +31,12 @@ namespace NDI_SubTitle
         private int Fading_X;
         private readonly int delta_X;
 
-        public NDIRender(CancellationToken cancellationToken, NDIConfig config, Font font)
+        public NDIRender(CancellationToken cancellationToken, RenderConfig config, Font font)
         {
             this.cancellationToken = cancellationToken;
 
             // We are going to create a 1920x180 frame at 50p, progressive (default).
-            this.videoFrame = new VideoFrame(config.NDI_width, config.NDI_height, config.aspectRatio, config.frameRateNumerator, config.frameRateDenominator);
+            this.videoFrame = new VideoFrame(config.Width, config.Height, config.aspectRatio, config.frameRateNumerator, config.frameRateDenominator);
             bmp = new Bitmap(videoFrame.Width, videoFrame.Height, videoFrame.Stride,
                 System.Drawing.Imaging.PixelFormat.Format32bppArgb, videoFrame.BufferPtr);
             graphics = Graphics.FromImage(bmp);

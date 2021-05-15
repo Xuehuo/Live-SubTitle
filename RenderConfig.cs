@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace NDI_SubTitle
 {
-    public class NDIConfig
+    public class RenderConfig
     {
         // NDI Output int width, int height, float aspectRatio, int frameRateNumerator, int frameRateDenominator
-        public int NDI_width;
-        public int NDI_height;
+        public int Width;
+        public int Height;
         public float aspectRatio;
         public int frameRateNumerator;
         public int frameRateDenominator;
@@ -23,13 +23,13 @@ namespace NDI_SubTitle
         public Color Default_Color;
         public int Fade_Time; //ms
 
-        public NDIConfig(bool is_default = false)
+        public RenderConfig(bool is_default = false)
         {
             if (is_default)
             {
-                NDI_width = 1920;
-                NDI_height = 180;
-                aspectRatio = Convert.ToSingle(NDI_width) / Convert.ToSingle(NDI_height);
+                Width = 1920;
+                Height = 180;
+                aspectRatio = Convert.ToSingle(Width) / Convert.ToSingle(Height);
                 frameRateNumerator = 50;
                 frameRateDenominator = 1;
 
@@ -40,14 +40,14 @@ namespace NDI_SubTitle
             }
         }
 
-        public static NDIConfig ReadNDIConfig(JObject jo)
+        public static RenderConfig ReadNDIConfig(JObject jo)
         {
             try
             {
-                NDIConfig config = new NDIConfig();
-                config.NDI_width = Convert.ToInt32(jo["NDI_width"].ToString());
-                config.NDI_height = Convert.ToInt32(jo["NDI_height"].ToString());
-                config.aspectRatio = Convert.ToSingle(config.NDI_width) / Convert.ToSingle(config.NDI_height);
+                RenderConfig config = new RenderConfig();
+                config.Width = Convert.ToInt32(jo["NDI_width"].ToString());
+                config.Height = Convert.ToInt32(jo["NDI_height"].ToString());
+                config.aspectRatio = Convert.ToSingle(config.Width) / Convert.ToSingle(config.Height);
                 config.frameRateNumerator = Convert.ToInt32(jo["frameRateNumerator"].ToString());
                 config.frameRateDenominator = Convert.ToInt32(jo["frameRateDenominator"].ToString());
 
@@ -66,7 +66,7 @@ namespace NDI_SubTitle
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
-                return new NDIConfig(true);//Return Default Setting
+                return new RenderConfig(true);//Return Default Setting
             }
         }
     }

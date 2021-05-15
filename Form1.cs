@@ -38,7 +38,7 @@ namespace NDI_SubTitle
         SubTitle Previewing = SubTitle.Empty;
 
         JObject Config;
-        NDIConfig NDI_Config;
+        RenderConfig NDI_Config;
         NDIRender Renderer;
         CancellationTokenSource cancelNDI;
         float Font_Size;
@@ -70,9 +70,9 @@ namespace NDI_SubTitle
             {
                 Config = JObject.Parse(File.ReadAllText(config_path));
                 if (Config.ContainsKey("NDI"))
-                    NDI_Config = NDIConfig.ReadNDIConfig(Config["NDI"] as JObject);
+                    NDI_Config = RenderConfig.ReadNDIConfig(Config["NDI"] as JObject);
                 else
-                    NDI_Config = new NDIConfig(true);
+                    NDI_Config = new RenderConfig(true);
                 if (Config.ContainsKey("Font-Size"))
                     Font_Size = Convert.ToSingle(Config["Font-Size"].ToString());
                 else
@@ -82,7 +82,7 @@ namespace NDI_SubTitle
             {
                 Console.WriteLine("Reading Config File Failed");
                 Console.WriteLine(ex.ToString());
-                NDI_Config = new NDIConfig(true);
+                NDI_Config = new RenderConfig(true);
                 Font_Size = 50;
             }
         }
@@ -309,21 +309,31 @@ namespace NDI_SubTitle
             {
                 if (render_form == null)
                     return;
-
+                render_form.Fade(SubTitle.Empty);
+                Program(SubTitle.Empty);
             }
         }
 
         private void btn_fade_Click(object sender = null, EventArgs e = null)  //Fade
         {
-            if (Renderer == null)
-                return;
             if (subTitles.Count == 0)
                 return;
             if (lst_SubTitle.SelectedIndex < 0)
                 return;
             if (subTitles.Count > lst_SubTitle.SelectedIndex)
             {
-                Renderer.Fade(Previewing);
+                if (render_mode == RenderMode.FullScreen)
+                {
+                    if (render_form == null)
+                        return;
+                    render_form.Fade(Previewing);
+                }
+                else
+                {
+                    if (Renderer == null)
+                        return;
+                    Renderer.Fade(Previewing);
+                }
                 Program(Previewing);
                 run_printer = Previewing.id + 1;
                 if (run_printer != subTitles.Count)
@@ -342,21 +352,17 @@ namespace NDI_SubTitle
             {
                 if (render_form == null) return;
                 render_form.Cut(Previewing);
-                Program(Previewing);
-                run_printer = Previewing.id + 1;
-                if (run_printer != subTitles.Count)
-                    lst_SubTitle.SetSelected(run_printer, true);
             }
             else
             {
                 if (Renderer == null)
                     return;
                 Renderer.Cut(Previewing);
-                Program(Previewing);
-                run_printer = Previewing.id + 1;
-                if (run_printer != subTitles.Count)
-                    lst_SubTitle.SetSelected(run_printer, true);
             }
+            Program(Previewing);
+            run_printer = Previewing.id + 1;
+            if (run_printer != subTitles.Count)
+                lst_SubTitle.SetSelected(run_printer, true);
         }
 
         private void btn_Clear_Click(object sender = null, EventArgs e = null)
