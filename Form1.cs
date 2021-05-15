@@ -41,7 +41,6 @@ namespace NDI_SubTitle
         RenderConfig NDI_Config;
         NDIRender Renderer;
         CancellationTokenSource cancelNDI;
-        float Font_Size;
 
 
         //Screen Output
@@ -74,17 +73,19 @@ namespace NDI_SubTitle
                 else
                     NDI_Config = new RenderConfig(true);
                 if (Config.ContainsKey("Font-Size"))
-                    Font_Size = Convert.ToSingle(Config["Font-Size"].ToString());
+                    NDI_Config.fontSize = Convert.ToSingle(Config["Font-Size"].ToString());
                 else
-                    Font_Size = 50;
+                    NDI_Config.fontSize = 50;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Reading Config File Failed");
                 Console.WriteLine(ex.ToString());
                 NDI_Config = new RenderConfig(true);
-                Font_Size = 50;
+                NDI_Config.fontSize = 50;
             }
+            scroll_fontSize.Value = (int)NDI_Config.fontSize;
+
         }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -159,7 +160,7 @@ namespace NDI_SubTitle
             if (Renderer != null)
                 return;
             cancelNDI = new CancellationTokenSource();
-            Renderer = new NDIRender(cancelNDI.Token, NDI_Config, new Font(new FontFamily(cmb_Fonts.SelectedItem.ToString()), Font_Size));
+            Renderer = new NDIRender(cancelNDI.Token, NDI_Config, new Font(new FontFamily(cmb_Fonts.SelectedItem.ToString()), NDI_Config.fontSize));
             Task.Run(async () => await Renderer.Run());
             lb_Status.ForeColor = Color.Green;
             lb_Status.Text = "NDI On";
@@ -269,10 +270,10 @@ namespace NDI_SubTitle
                 if (render_mode == RenderMode.FullScreen)
                 {
                     if (render_form != null)
-                        render_form.ChangeFont(new Font(new FontFamily(cmb.SelectedItem.ToString()), Font_Size));
+                        render_form.ChangeFont(new FontFamily(cmb.SelectedItem.ToString()));
                 }
                 else if (Renderer != null)
-                    Renderer.ChangeFont(new Font(new FontFamily(cmb.SelectedItem.ToString()), Font_Size));
+                    Renderer.ChangeFont(new Font(new FontFamily(cmb.SelectedItem.ToString()), NDI_Config.fontSize));
             }
         }
 
@@ -430,7 +431,7 @@ namespace NDI_SubTitle
         {
             if (cmb_monitor.Enabled == false) //has locked
             {
-                render_form = new Render_Form(display_screen, scn_width, scn_height, new Font(new FontFamily(cmb_Fonts.SelectedItem.ToString()), Font_Size), NDI_Config);
+                render_form = new Render_Form(display_screen, scn_width, scn_height, new Font(new FontFamily(cmb_Fonts.SelectedItem.ToString()), NDI_Config.fontSize), NDI_Config);
                 render_form.Run(50.0f, 50.0f);
             }
             else
@@ -467,6 +468,45 @@ namespace NDI_SubTitle
 
         }
 
+        private void scroll_sub1X_Scroll(object sender, ScrollEventArgs e)
+        {
+            NDI_Config.Point_Sub1.X = e.NewValue;
+            txt_sub1X.Text = e.NewValue + ""; NotifyChanges();
+        }
+
+        private void scroll_sub1Y_Scroll(object sender, ScrollEventArgs e)
+        {
+            NDI_Config.Point_Sub1.Y = e.NewValue;
+            txt_sub1Y.Text = e.NewValue + ""; NotifyChanges();
+        }
+        private void hScrollBar3_Scroll(object sender, ScrollEventArgs e)
+        {
+            NDI_Config.Point_Sub2.X = e.NewValue;
+            txt_sub2X.Text = e.NewValue + ""; NotifyChanges();
+        }
+
+        private void hScrollBar4_Scroll(object sender, ScrollEventArgs e)
+        {
+            NDI_Config.Point_Sub2.Y = e.NewValue;
+            txt_sub2Y.Text = e.NewValue + ""; NotifyChanges();
+        }
+
+        private void NotifyChanges()
+        {
+            if (render_mode == RenderMode.FullScreen)
+            {
+                if (render_form != null)
+                    render_form.onChanged(NDI_Config);
+            }
+        }
+
+        private void scroll_fontSize_Scroll(object sender, ScrollEventArgs e)
+        {
+            NDI_Config.fontSize = e.NewValue / 10.0f;
+            txt_fontSize.Text = e.NewValue / 10.0f + "";
+            NotifyChanges();
+        }
+
         // TODO: Add lock
         private void btn_lock_screen_Click(object sender, EventArgs e)
         {
@@ -480,6 +520,9 @@ namespace NDI_SubTitle
                 display_screen = DisplayDevice.GetDisplay((DisplayIndex)id);
                 scn_height = Convert.ToInt32(txt_screen_height.Text);
                 scn_width = Convert.ToInt32(txt_screen_width.Text);
+                scroll_sub1X.Maximum = scroll_sub2X.Maximum = scn_height;
+                scroll_sub1Y.Maximum = scroll_sub2Y.Maximum = scn_width;
+
                 cmb_monitor.Enabled = false;
                 btn_lock_screen.Text = "Locked";
                 btn_lock_screen.ForeColor = Color.Green;

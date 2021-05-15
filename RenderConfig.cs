@@ -21,6 +21,7 @@ namespace NDI_SubTitle
         public Point Point_Sub1;
         public Point Point_Sub2;
         public Color Default_Color;
+        public float fontSize;
         public int Fade_Time; //ms
 
         public RenderConfig(bool is_default = false)
@@ -35,6 +36,7 @@ namespace NDI_SubTitle
 
                 Point_Sub1 = new Point(90, 20);
                 Point_Sub2 = new Point(90, 90);
+                fontSize = 25.0f;
                 Default_Color = Color.White;
                 Fade_Time = 500;
             }

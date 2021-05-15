@@ -65,8 +65,25 @@
             this.rdo_Render_FullScreen = new System.Windows.Forms.RadioButton();
             this.rdo_Render_NDI = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.scroll_sub1X = new System.Windows.Forms.HScrollBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.scroll_sub1Y = new System.Windows.Forms.HScrollBar();
+            this.label6 = new System.Windows.Forms.Label();
+            this.scroll_sub2X = new System.Windows.Forms.HScrollBar();
+            this.label7 = new System.Windows.Forms.Label();
+            this.scroll_sub2Y = new System.Windows.Forms.HScrollBar();
+            this.group_Config = new System.Windows.Forms.GroupBox();
+            this.txt_fontSize = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.scroll_fontSize = new System.Windows.Forms.HScrollBar();
+            this.txt_sub2Y = new System.Windows.Forms.TextBox();
+            this.txt_sub2X = new System.Windows.Forms.TextBox();
+            this.txt_sub1Y = new System.Windows.Forms.TextBox();
+            this.txt_sub1X = new System.Windows.Forms.TextBox();
             this.gp_render_mode.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.group_Config.SuspendLayout();
             this.SuspendLayout();
             // 
             // lb_program_file
@@ -311,10 +328,119 @@
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
+            // scroll_sub1X
+            // 
+            resources.ApplyResources(this.scroll_sub1X, "scroll_sub1X");
+            this.scroll_sub1X.Maximum = 1920;
+            this.scroll_sub1X.Name = "scroll_sub1X";
+            this.scroll_sub1X.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scroll_sub1X_Scroll);
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // scroll_sub1Y
+            // 
+            resources.ApplyResources(this.scroll_sub1Y, "scroll_sub1Y");
+            this.scroll_sub1Y.Maximum = 1080;
+            this.scroll_sub1Y.Name = "scroll_sub1Y";
+            this.scroll_sub1Y.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scroll_sub1Y_Scroll);
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // scroll_sub2X
+            // 
+            resources.ApplyResources(this.scroll_sub2X, "scroll_sub2X");
+            this.scroll_sub2X.Maximum = 1920;
+            this.scroll_sub2X.Name = "scroll_sub2X";
+            this.scroll_sub2X.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar3_Scroll);
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // scroll_sub2Y
+            // 
+            resources.ApplyResources(this.scroll_sub2Y, "scroll_sub2Y");
+            this.scroll_sub2Y.Maximum = 1080;
+            this.scroll_sub2Y.Name = "scroll_sub2Y";
+            this.scroll_sub2Y.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar4_Scroll);
+            // 
+            // group_Config
+            // 
+            this.group_Config.Controls.Add(this.txt_fontSize);
+            this.group_Config.Controls.Add(this.label8);
+            this.group_Config.Controls.Add(this.scroll_fontSize);
+            this.group_Config.Controls.Add(this.txt_sub2Y);
+            this.group_Config.Controls.Add(this.txt_sub2X);
+            this.group_Config.Controls.Add(this.txt_sub1Y);
+            this.group_Config.Controls.Add(this.txt_sub1X);
+            this.group_Config.Controls.Add(this.label7);
+            this.group_Config.Controls.Add(this.scroll_sub2Y);
+            this.group_Config.Controls.Add(this.scroll_sub1X);
+            this.group_Config.Controls.Add(this.label6);
+            this.group_Config.Controls.Add(this.label2);
+            this.group_Config.Controls.Add(this.scroll_sub2X);
+            this.group_Config.Controls.Add(this.scroll_sub1Y);
+            this.group_Config.Controls.Add(this.label5);
+            resources.ApplyResources(this.group_Config, "group_Config");
+            this.group_Config.Name = "group_Config";
+            this.group_Config.TabStop = false;
+            // 
+            // txt_fontSize
+            // 
+            resources.ApplyResources(this.txt_fontSize, "txt_fontSize");
+            this.txt_fontSize.Name = "txt_fontSize";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // scroll_fontSize
+            // 
+            resources.ApplyResources(this.scroll_fontSize, "scroll_fontSize");
+            this.scroll_fontSize.Maximum = 500;
+            this.scroll_fontSize.Minimum = 10;
+            this.scroll_fontSize.Name = "scroll_fontSize";
+            this.scroll_fontSize.Value = 10;
+            this.scroll_fontSize.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scroll_fontSize_Scroll);
+            // 
+            // txt_sub2Y
+            // 
+            resources.ApplyResources(this.txt_sub2Y, "txt_sub2Y");
+            this.txt_sub2Y.Name = "txt_sub2Y";
+            // 
+            // txt_sub2X
+            // 
+            resources.ApplyResources(this.txt_sub2X, "txt_sub2X");
+            this.txt_sub2X.Name = "txt_sub2X";
+            // 
+            // txt_sub1Y
+            // 
+            resources.ApplyResources(this.txt_sub1Y, "txt_sub1Y");
+            this.txt_sub1Y.Name = "txt_sub1Y";
+            // 
+            // txt_sub1X
+            // 
+            resources.ApplyResources(this.txt_sub1X, "txt_sub1X");
+            this.txt_sub1X.Name = "txt_sub1X";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.group_Config);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gp_render_mode);
             this.Controls.Add(this.btn_ScnStop);
@@ -349,6 +475,8 @@
             this.gp_render_mode.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.group_Config.ResumeLayout(false);
+            this.group_Config.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -391,6 +519,22 @@
         private System.Windows.Forms.RadioButton rdo_Render_FullScreen;
         private System.Windows.Forms.RadioButton rdo_Render_NDI;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.HScrollBar scroll_sub1X;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.HScrollBar scroll_sub2Y;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.HScrollBar scroll_sub2X;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.HScrollBar scroll_sub1Y;
+        private System.Windows.Forms.GroupBox group_Config;
+        private System.Windows.Forms.TextBox txt_sub2Y;
+        private System.Windows.Forms.TextBox txt_sub2X;
+        private System.Windows.Forms.TextBox txt_sub1Y;
+        private System.Windows.Forms.TextBox txt_sub1X;
+        private System.Windows.Forms.TextBox txt_fontSize;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.HScrollBar scroll_fontSize;
     }
 }
 

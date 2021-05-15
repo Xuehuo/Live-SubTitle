@@ -30,8 +30,6 @@ namespace NDI_SubTitle
             // Render Initial
             program = SubTitle.Empty;
             fading = SubTitle.Empty;
-            Point_Sub1 = config.Point_Sub1;
-            Point_Sub2 = config.Point_Sub2;
 
             // Style
             defaultBrush = new SolidBrush(config.Default_Color);
@@ -83,8 +81,6 @@ namespace NDI_SubTitle
 
         private Font font;
         private SolidBrush defaultBrush;
-        private Point Point_Sub1;
-        private Point Point_Sub2;
 
         private SubTitle program;
         private SubTitle fading;
@@ -121,10 +117,20 @@ namespace NDI_SubTitle
             }
         }
 
-        public void ChangeFont(Font font)
+        public void ChangeFont(FontFamily font)
         {
             lock (syncLock)
-                this.font = font;
+                this.font = new Font(font, Config.fontSize);
+            isChange = true;
+        }
+
+        public void onChanged(RenderConfig config)
+        {
+            lock (syncLock)
+            {
+                font = new Font(font.FontFamily, config.fontSize);
+                isChange = true;
+            }
         }
 
         private void GenerateBmp()
@@ -135,8 +141,8 @@ namespace NDI_SubTitle
 
             if (!isFading)
             {
-                graphics.DrawString(program.First_Sub, font, defaultBrush, Point_Sub1);
-                graphics.DrawString(program.Second_Sub, font, defaultBrush, Point_Sub2);
+                graphics.DrawString(program.First_Sub, font, defaultBrush, Config.Point_Sub1);
+                graphics.DrawString(program.Second_Sub, font, defaultBrush, Config.Point_Sub2);
             }
             else
             {
@@ -176,8 +182,8 @@ namespace NDI_SubTitle
                     if (alpha < 0)
                         alpha = 0;
                     var brush = new SolidBrush(Color.FromArgb(alpha, Color.White));
-                    graphics.DrawString(program.First_Sub, font, brush, Point_Sub1);
-                    graphics.DrawString(program.Second_Sub, font, brush, Point_Sub2);
+                    graphics.DrawString(program.First_Sub, font, brush, Config.Point_Sub1);
+                    graphics.DrawString(program.Second_Sub, font, brush, Config.Point_Sub2);
                }
                 else if (Fading_X >= Alpha_Max / 2)
                 {
@@ -188,8 +194,8 @@ namespace NDI_SubTitle
                     if (alpha > 255)
                         alpha = 255;
                     var brush = new SolidBrush(Color.FromArgb(alpha, Color.White));
-                    graphics.DrawString(fading.First_Sub, font, brush, Point_Sub1);
-                    graphics.DrawString(fading.Second_Sub, font, brush, Point_Sub2);
+                    graphics.DrawString(fading.First_Sub, font, brush, Config.Point_Sub1);
+                    graphics.DrawString(fading.Second_Sub, font, brush, Config.Point_Sub2);
                 }
                 Fading_X += delta_X;
             }
