@@ -12,11 +12,19 @@ A Tool Using NDI To Make SubTitle In Live Production
 
 
 ## Features
-- use NDI to output, containing Alpha channel.<br>
-So you don't need to use Linear Key OR Luma Key if you send NDI to Wirecast or any other software.
+- Support NDI Output, containing Alpha channel.
+- Support FullScreen Output like vMix
 - Support **Fade**, **Cut**, Also **Fade Clear** and **Cut Clear**
 - Display **Two Lines** in the same time
-- ~~Support Directly outputing to switcher such as ATEM~~ (NOT implementation)
+
+## User Guide
+
+1. 启动后选择输出屏幕 确认分辨率并Lock
+2. Import导入字幕txt，Load加载所有字幕
+3. 在系统高级显示设置中调整输出显示器的帧率
+4. Alt + Tab切换到 Full Screen 窗口后再切换回来（不然光标不见了）
+5. 在 Render Control Panel 中调整字幕位置和大小，合适后Lock住
+6. 使用空格和回车进行切换 
 
 
 ## Input File Format
@@ -27,6 +35,4 @@ So you don't need to use Linear Key OR Luma Key if you send NDI to Wirecast or a
 
 
 ## TODO
-- ~~Add Config File~~
 - Remember Last Open
-- Direct Output via Unity or DirectX
