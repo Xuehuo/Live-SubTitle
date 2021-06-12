@@ -186,8 +186,8 @@
             // lst_File
             // 
             this.lst_File.AllowDrop = true;
-            this.lst_File.FormattingEnabled = true;
             resources.ApplyResources(this.lst_File, "lst_File");
+            this.lst_File.FormattingEnabled = true;
             this.lst_File.Name = "lst_File";
             this.lst_File.SelectedIndexChanged += new System.EventHandler(this.lst_File_SelectedIndexChanged);
             this.lst_File.DragDrop += new System.Windows.Forms.DragEventHandler(this.Lst_File_DragDrop);
@@ -222,8 +222,8 @@
             // 
             // btn_Lock_Font
             // 
-            this.btn_Lock_Font.ForeColor = System.Drawing.Color.Red;
             resources.ApplyResources(this.btn_Lock_Font, "btn_Lock_Font");
+            this.btn_Lock_Font.ForeColor = System.Drawing.Color.Red;
             this.btn_Lock_Font.Name = "btn_Lock_Font";
             this.btn_Lock_Font.UseVisualStyleBackColor = true;
             this.btn_Lock_Font.Click += new System.EventHandler(this.btn_Lock_Font_Click);
@@ -386,6 +386,7 @@
             // 
             // panel_renderConfig
             // 
+            resources.ApplyResources(this.panel_renderConfig, "panel_renderConfig");
             this.panel_renderConfig.Controls.Add(this.txt_fadeTime);
             this.panel_renderConfig.Controls.Add(this.label9);
             this.panel_renderConfig.Controls.Add(this.scroll_fadeTime);
@@ -407,7 +408,6 @@
             this.panel_renderConfig.Controls.Add(this.scroll_sub2X);
             this.panel_renderConfig.Controls.Add(this.scroll_sub1Y);
             this.panel_renderConfig.Controls.Add(this.label5);
-            resources.ApplyResources(this.panel_renderConfig, "panel_renderConfig");
             this.panel_renderConfig.Name = "panel_renderConfig";
             this.panel_renderConfig.TabStop = false;
             // 
@@ -490,15 +490,15 @@
             // 
             // btn_saveConfig
             // 
-            this.btn_saveConfig.ForeColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.btn_saveConfig, "btn_saveConfig");
+            this.btn_saveConfig.ForeColor = System.Drawing.Color.Black;
             this.btn_saveConfig.Name = "btn_saveConfig";
             this.btn_saveConfig.UseVisualStyleBackColor = true;
             // 
             // btn_loadConfig
             // 
-            this.btn_loadConfig.ForeColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.btn_loadConfig, "btn_loadConfig");
+            this.btn_loadConfig.ForeColor = System.Drawing.Color.Black;
             this.btn_loadConfig.Name = "btn_loadConfig";
             this.btn_loadConfig.UseVisualStyleBackColor = true;
             // 

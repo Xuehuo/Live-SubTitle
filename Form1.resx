@@ -335,6 +335,10 @@
   <data name="&gt;&gt;lb_pre_id.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lb_pgm_id.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
   <data name="lb_pgm_id.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -395,6 +399,9 @@
   <data name="&gt;&gt;lb_preview.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
+  <data name="lb_program.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
   <data name="lb_program.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -425,6 +432,9 @@
   <data name="&gt;&gt;lb_program.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
+  <data name="btn_fade.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="btn_fade.Location" type="System.Drawing.Point, System.Drawing">
     <value>1440, 565</value>
   </data>
@@ -449,6 +459,9 @@
   <data name="&gt;&gt;btn_fade.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
+  <data name="btn_Hard.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="btn_Hard.Location" type="System.Drawing.Point, System.Drawing">
     <value>1265, 565</value>
   </data>
@@ -472,6 +485,9 @@
   </data>
   <data name="&gt;&gt;btn_Hard.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="btn_Clear_Cut.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="btn_Clear_Cut.Location" type="System.Drawing.Point, System.Drawing">
     <value>1265, 657</value>
@@ -521,6 +537,9 @@
   <data name="&gt;&gt;btn_DeleteFile.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="lst_File.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
   <data name="lst_File.ItemHeight" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
@@ -544,6 +563,9 @@
   </data>
   <data name="&gt;&gt;lst_File.ZOrder" xml:space="preserve">
     <value>11</value>
+  </data>
+  <data name="lst_SubTitle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
   </data>
   <data name="lst_SubTitle.Font" type="System.Drawing.Font, System.Drawing">
     <value>宋体, 12pt</value>
@@ -656,6 +678,9 @@
   <data name="&gt;&gt;cmb_Fonts.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="btn_Lock_Font.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="btn_Lock_Font.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 1123</value>
   </data>
@@ -679,6 +704,9 @@
   </data>
   <data name="&gt;&gt;btn_Lock_Font.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <data name="btn_Clear_Fade.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="btn_Clear_Fade.Location" type="System.Drawing.Point, System.Drawing">
     <value>1440, 657</value>
@@ -704,7 +732,6 @@
   <data name="&gt;&gt;btn_Clear_Fade.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btn_refresh_monitor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -963,54 +990,6 @@
   <data name="&gt;&gt;btn_scnStart.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;rdo_Render_FullScreen.Name" xml:space="preserve">
-    <value>rdo_Render_FullScreen</value>
-  </data>
-  <data name="&gt;&gt;rdo_Render_FullScreen.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdo_Render_FullScreen.Parent" xml:space="preserve">
-    <value>gp_render_mode</value>
-  </data>
-  <data name="&gt;&gt;rdo_Render_FullScreen.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;rdo_Render_NDI.Name" xml:space="preserve">
-    <value>rdo_Render_NDI</value>
-  </data>
-  <data name="&gt;&gt;rdo_Render_NDI.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdo_Render_NDI.Parent" xml:space="preserve">
-    <value>gp_render_mode</value>
-  </data>
-  <data name="&gt;&gt;rdo_Render_NDI.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="gp_render_mode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 11</value>
-  </data>
-  <data name="gp_render_mode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 63</value>
-  </data>
-  <data name="gp_render_mode.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="gp_render_mode.Text" xml:space="preserve">
-    <value>Render Mode</value>
-  </data>
-  <data name="&gt;&gt;gp_render_mode.Name" xml:space="preserve">
-    <value>gp_render_mode</value>
-  </data>
-  <data name="&gt;&gt;gp_render_mode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gp_render_mode.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;gp_render_mode.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="rdo_Render_FullScreen.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1064,6 +1043,30 @@
   </data>
   <data name="&gt;&gt;rdo_Render_NDI.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="gp_render_mode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>635, 11</value>
+  </data>
+  <data name="gp_render_mode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 63</value>
+  </data>
+  <data name="gp_render_mode.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="gp_render_mode.Text" xml:space="preserve">
+    <value>Render Mode</value>
+  </data>
+  <data name="&gt;&gt;gp_render_mode.Name" xml:space="preserve">
+    <value>gp_render_mode</value>
+  </data>
+  <data name="&gt;&gt;gp_render_mode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gp_render_mode.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gp_render_mode.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>873, 15</value>
@@ -1314,167 +1317,8 @@
   <data name="&gt;&gt;scroll_sub2Y.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;txt_fadeTime.Name" xml:space="preserve">
-    <value>txt_fadeTime</value>
-  </data>
-  <data name="&gt;&gt;txt_fadeTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_fadeTime.Parent" xml:space="preserve">
-    <value>panel_renderConfig</value>
-  </data>
-  <data name="&gt;&gt;txt_fadeTime.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label9.Name" xml:space="preserve">
-    <value>label9</value>
-  </data>
-  <data name="&gt;&gt;label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
-    <value>panel_renderConfig</value>
-  </data>
-  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;scroll_fadeTime.Name" xml:space="preserve">
-    <value>scroll_fadeTime</value>
-  </data>
-  <data name="&gt;&gt;scroll_fadeTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;scroll_fadeTime.Parent" xml:space="preserve">
-    <value>panel_renderConfig</value>
-  </data>
-  <data name="&gt;&gt;scroll_fadeTime.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;btn_sync_sub2X.Name" xml:space="preserve">
-    <value>btn_sync_sub2X</value>
-  </data>
-  <data name="&gt;&gt;btn_sync_sub2X.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_sync_sub2X.Parent" xml:space="preserve">
-    <value>panel_renderConfig</value>
-  </data>
-  <data name="&gt;&gt;btn_sync_sub2X.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;txt_fontSize.Name" xml:space="preserve">
-    <value>txt_fontSize</value>
-  </data>
-  <data name="&gt;&gt;txt_fontSize.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_fontSize.Parent" xml:space="preserve">
-    <value>panel_renderConfig</value>
-  </data>
-  <data name="&gt;&gt;txt_fontSize.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;label8.Name" xml:space="preserve">
-    <value>label8</value>
-  </data>
-  <data name="&gt;&gt;label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
-    <value>panel_renderConfig</value>
-  </data>
-  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;scroll_fontSize.Name" xml:space="preserve">
-    <value>scroll_fontSize</value>
-  </data>
-  <data name="&gt;&gt;scroll_fontSize.Type" xml:space="preserve">
-    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;scroll_fontSize.Parent" xml:space="preserve">
-    <value>panel_renderConfig</value>
-  </data>
-  <data name="&gt;&gt;scroll_fontSize.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;txt_sub2Y.Name" xml:space="preserve">
-    <value>txt_sub2Y</value>
-  </data>
-  <data name="&gt;&gt;txt_sub2Y.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_sub2Y.Parent" xml:space="preserve">
-    <value>panel_renderConfig</value>
-  </data>
-  <data name="&gt;&gt;txt_sub2Y.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;txt_sub2X.Name" xml:space="preserve">
-    <value>txt_sub2X</value>
-  </data>
-  <data name="&gt;&gt;txt_sub2X.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_sub2X.Parent" xml:space="preserve">
-    <value>panel_renderConfig</value>
-  </data>
-  <data name="&gt;&gt;txt_sub2X.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;txt_sub1Y.Name" xml:space="preserve">
-    <value>txt_sub1Y</value>
-  </data>
-  <data name="&gt;&gt;txt_sub1Y.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_sub1Y.Parent" xml:space="preserve">
-    <value>panel_renderConfig</value>
-  </data>
-  <data name="&gt;&gt;txt_sub1Y.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;txt_sub1X.Name" xml:space="preserve">
-    <value>txt_sub1X</value>
-  </data>
-  <data name="&gt;&gt;txt_sub1X.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_sub1X.Parent" xml:space="preserve">
-    <value>panel_renderConfig</value>
-  </data>
-  <data name="&gt;&gt;txt_sub1X.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="panel_renderConfig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 755</value>
-  </data>
-  <data name="panel_renderConfig.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="panel_renderConfig.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="panel_renderConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1586, 362</value>
-  </data>
-  <data name="panel_renderConfig.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
-  </data>
-  <data name="panel_renderConfig.Text" xml:space="preserve">
-    <value>Render Control Panel</value>
-  </data>
-  <data name="&gt;&gt;panel_renderConfig.Name" xml:space="preserve">
-    <value>panel_renderConfig</value>
-  </data>
-  <data name="&gt;&gt;panel_renderConfig.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel_renderConfig.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panel_renderConfig.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="panel_renderConfig.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="txt_fadeTime.Location" type="System.Drawing.Point, System.Drawing">
     <value>1474, 321</value>
@@ -1758,6 +1602,39 @@
   <data name="&gt;&gt;txt_sub1X.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="panel_renderConfig.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 755</value>
+  </data>
+  <data name="panel_renderConfig.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="panel_renderConfig.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="panel_renderConfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1586, 362</value>
+  </data>
+  <data name="panel_renderConfig.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="panel_renderConfig.Text" xml:space="preserve">
+    <value>Render Control Panel</value>
+  </data>
+  <data name="&gt;&gt;panel_renderConfig.Name" xml:space="preserve">
+    <value>panel_renderConfig</value>
+  </data>
+  <data name="&gt;&gt;panel_renderConfig.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel_renderConfig.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panel_renderConfig.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btn_saveConfig.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="btn_saveConfig.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1784,6 +1661,9 @@
   </data>
   <data name="&gt;&gt;btn_saveConfig.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="btn_loadConfig.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="btn_loadConfig.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

@@ -232,7 +232,6 @@ namespace NDI_SubTitle
         {
             if (isChange || isFading)
             {
-                Console.WriteLine("Rerender");
                 lock (syncLock)
                 {
                     GenerateBmp();

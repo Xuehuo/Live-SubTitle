@@ -111,7 +111,7 @@ namespace NDI_SubTitle
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             var keyData = e.KeyData;
-            if (keyData == (Keys.Control | Keys.Space))
+            if (keyData == (Keys.Control | Keys.ProcessKey))
             {   //Fade to Blank
                 Console.WriteLine("ShortCut: Ctrl + Space");
                 btn_Clear_Fade_Click();
@@ -645,7 +645,8 @@ namespace NDI_SubTitle
 
         private void txt_fontSize_TextChanged(object sender, EventArgs e)
         {
-            renderConfig.fontSize = scroll_fontSize.Value = Convert.ToInt32(txt_fontSize.Text);
+            renderConfig.fontSize = Convert.ToSingle(txt_fontSize.Text);
+            scroll_fontSize.Value = (int) renderConfig.fontSize * 10;
             NotifyChanges();
         }
 
