@@ -95,6 +95,7 @@ namespace NDI_SubTitle
             txt_sub1Y.Text = (scroll_sub1Y.Value = renderConfig.Point_Sub1.Y).ToString();
             txt_sub2X.Text = (scroll_sub2X.Value = renderConfig.Point_Sub2.X).ToString();
             txt_sub2Y.Text = (scroll_sub2Y.Value = renderConfig.Point_Sub2.Y).ToString();
+            txt_fadeTime.Text = (scroll_fadeTime.Value = renderConfig.Fade_Time).ToString();
             const string DEBUG_LYRICS_FILENAME = "test-lyrics.txt";
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), DEBUG_LYRICS_FILENAME);
             if (File.Exists(filePath))
@@ -208,7 +209,7 @@ namespace NDI_SubTitle
         {
             if (Renderer != null)
                 return;
-            if(fontFamily == null)
+            if (fontFamily == null)
             {
                 MessageBox.Show("Please select font");
                 return;
@@ -338,6 +339,7 @@ namespace NDI_SubTitle
                                 PrivateFontCollection collection = new PrivateFontCollection();
                                 collection.AddFontFile(filePath);
                                 fontFamily = new FontFamily(collection.Families[0].Name, collection);
+                                Console.WriteLine($"Change font to selected {fontFamily.Name} from path {filePath}");
                                 if (render_mode == RenderMode.FullScreen)
                                 {
                                     if (render_form != null)
@@ -363,19 +365,19 @@ namespace NDI_SubTitle
 
         private void btn_Lock_Font_Click(object sender, EventArgs e)
         {
-            if (cmb_Fonts.Enabled) //unlock
+            if (panel_renderConfig.Enabled) // unlocked
             {
                 // lock it
-                cmb_Fonts.Enabled = false;
+                panel_renderConfig.Enabled = false;
                 btn_Lock_Font.ForeColor = Color.Green;
                 btn_Lock_Font.Text = "Locked";
             }
             else
             {
                 // unlock it
-                cmb_Fonts.Enabled = true;
+                panel_renderConfig.Enabled = true;
                 btn_Lock_Font.ForeColor = Color.Red;
-                btn_Lock_Font.Text = "UnLock";
+                btn_Lock_Font.Text = "Lock Render Control Panel";
             }
         }
         #endregion
@@ -609,6 +611,47 @@ namespace NDI_SubTitle
             {
                 e.Handled = true;
             }
+        }
+
+        private void scroll_fadeTime_ValueChanged(object sender, EventArgs e)
+        {
+            renderConfig.Fade_Time = scroll_fadeTime.Value;
+            txt_fadeTime.Text = scroll_fadeTime.Value.ToString();
+        }
+
+        private void txt_sub1X_TextChanged(object sender, EventArgs e)
+        {
+            renderConfig.Point_Sub1.X = scroll_sub1X.Value = Convert.ToInt32(txt_sub1X.Text);
+            NotifyChanges();
+        }
+
+        private void txt_sub1Y_TextChanged(object sender, EventArgs e)
+        {
+            renderConfig.Point_Sub1.Y = scroll_sub1Y.Value = Convert.ToInt32(txt_sub1Y.Text);
+            NotifyChanges();
+        }
+
+        private void txt_sub2X_TextChanged(object sender, EventArgs e)
+        {
+            renderConfig.Point_Sub2.X = scroll_sub2X.Value = Convert.ToInt32(txt_sub2X.Text);
+            NotifyChanges();
+        }
+
+        private void txt_sub2Y_TextChanged(object sender, EventArgs e)
+        {
+            renderConfig.Point_Sub2.Y = scroll_sub2Y.Value = Convert.ToInt32(txt_sub2Y.Text);
+            NotifyChanges();
+        }
+
+        private void txt_fontSize_TextChanged(object sender, EventArgs e)
+        {
+            renderConfig.fontSize = scroll_fontSize.Value = Convert.ToInt32(txt_fontSize.Text);
+            NotifyChanges();
+        }
+
+        private void txt_fadeTime_TextChanged(object sender, EventArgs e)
+        {
+            renderConfig.Fade_Time = scroll_fadeTime.Value = Convert.ToInt32(txt_fadeTime.Text);
         }
 
         // TODO: Add lock

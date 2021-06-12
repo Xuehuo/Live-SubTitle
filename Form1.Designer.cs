@@ -73,7 +73,10 @@
             this.scroll_sub2X = new System.Windows.Forms.HScrollBar();
             this.label7 = new System.Windows.Forms.Label();
             this.scroll_sub2Y = new System.Windows.Forms.HScrollBar();
-            this.group_Config = new System.Windows.Forms.GroupBox();
+            this.panel_renderConfig = new System.Windows.Forms.GroupBox();
+            this.txt_fadeTime = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.scroll_fadeTime = new System.Windows.Forms.HScrollBar();
             this.btn_sync_sub2X = new System.Windows.Forms.Button();
             this.txt_fontSize = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -82,11 +85,11 @@
             this.txt_sub2X = new System.Windows.Forms.TextBox();
             this.txt_sub1Y = new System.Windows.Forms.TextBox();
             this.txt_sub1X = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cmb_FontStyle = new System.Windows.Forms.ComboBox();
+            this.btn_saveConfig = new System.Windows.Forms.Button();
+            this.btn_loadConfig = new System.Windows.Forms.Button();
             this.gp_render_mode.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.group_Config.SuspendLayout();
+            this.panel_renderConfig.SuspendLayout();
             this.SuspendLayout();
             // 
             // lb_program_file
@@ -381,32 +384,53 @@
             this.scroll_sub2Y.Name = "scroll_sub2Y";
             this.scroll_sub2Y.ValueChanged += new System.EventHandler(this.scroll_sub2Y_ValueChanged);
             // 
-            // group_Config
+            // panel_renderConfig
             // 
-            this.group_Config.Controls.Add(this.cmb_FontStyle);
-            this.group_Config.Controls.Add(this.label9);
-            this.group_Config.Controls.Add(this.btn_sync_sub2X);
-            this.group_Config.Controls.Add(this.txt_fontSize);
-            this.group_Config.Controls.Add(this.label8);
-            this.group_Config.Controls.Add(this.scroll_fontSize);
-            this.group_Config.Controls.Add(this.txt_sub2Y);
-            this.group_Config.Controls.Add(this.txt_sub2X);
-            this.group_Config.Controls.Add(this.btn_Lock_Font);
-            this.group_Config.Controls.Add(this.txt_sub1Y);
-            this.group_Config.Controls.Add(this.cmb_Fonts);
-            this.group_Config.Controls.Add(this.lb_Font);
-            this.group_Config.Controls.Add(this.txt_sub1X);
-            this.group_Config.Controls.Add(this.label7);
-            this.group_Config.Controls.Add(this.scroll_sub2Y);
-            this.group_Config.Controls.Add(this.scroll_sub1X);
-            this.group_Config.Controls.Add(this.label6);
-            this.group_Config.Controls.Add(this.label2);
-            this.group_Config.Controls.Add(this.scroll_sub2X);
-            this.group_Config.Controls.Add(this.scroll_sub1Y);
-            this.group_Config.Controls.Add(this.label5);
-            resources.ApplyResources(this.group_Config, "group_Config");
-            this.group_Config.Name = "group_Config";
-            this.group_Config.TabStop = false;
+            this.panel_renderConfig.Controls.Add(this.txt_fadeTime);
+            this.panel_renderConfig.Controls.Add(this.label9);
+            this.panel_renderConfig.Controls.Add(this.scroll_fadeTime);
+            this.panel_renderConfig.Controls.Add(this.btn_sync_sub2X);
+            this.panel_renderConfig.Controls.Add(this.txt_fontSize);
+            this.panel_renderConfig.Controls.Add(this.label8);
+            this.panel_renderConfig.Controls.Add(this.scroll_fontSize);
+            this.panel_renderConfig.Controls.Add(this.txt_sub2Y);
+            this.panel_renderConfig.Controls.Add(this.txt_sub2X);
+            this.panel_renderConfig.Controls.Add(this.txt_sub1Y);
+            this.panel_renderConfig.Controls.Add(this.cmb_Fonts);
+            this.panel_renderConfig.Controls.Add(this.lb_Font);
+            this.panel_renderConfig.Controls.Add(this.txt_sub1X);
+            this.panel_renderConfig.Controls.Add(this.label7);
+            this.panel_renderConfig.Controls.Add(this.scroll_sub2Y);
+            this.panel_renderConfig.Controls.Add(this.scroll_sub1X);
+            this.panel_renderConfig.Controls.Add(this.label6);
+            this.panel_renderConfig.Controls.Add(this.label2);
+            this.panel_renderConfig.Controls.Add(this.scroll_sub2X);
+            this.panel_renderConfig.Controls.Add(this.scroll_sub1Y);
+            this.panel_renderConfig.Controls.Add(this.label5);
+            resources.ApplyResources(this.panel_renderConfig, "panel_renderConfig");
+            this.panel_renderConfig.Name = "panel_renderConfig";
+            this.panel_renderConfig.TabStop = false;
+            // 
+            // txt_fadeTime
+            // 
+            resources.ApplyResources(this.txt_fadeTime, "txt_fadeTime");
+            this.txt_fadeTime.Name = "txt_fadeTime";
+            this.txt_fadeTime.TextChanged += new System.EventHandler(this.txt_fadeTime_TextChanged);
+            this.txt_fadeTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_NumberFilter);
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
+            // scroll_fadeTime
+            // 
+            resources.ApplyResources(this.scroll_fadeTime, "scroll_fadeTime");
+            this.scroll_fadeTime.Maximum = 2000;
+            this.scroll_fadeTime.Minimum = 10;
+            this.scroll_fadeTime.Name = "scroll_fadeTime";
+            this.scroll_fadeTime.Value = 10;
+            this.scroll_fadeTime.ValueChanged += new System.EventHandler(this.scroll_fadeTime_ValueChanged);
             // 
             // btn_sync_sub2X
             // 
@@ -419,6 +443,8 @@
             // 
             resources.ApplyResources(this.txt_fontSize, "txt_fontSize");
             this.txt_fontSize.Name = "txt_fontSize";
+            this.txt_fontSize.TextChanged += new System.EventHandler(this.txt_fontSize_TextChanged);
+            this.txt_fontSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_NumberFilter);
             // 
             // label8
             // 
@@ -438,43 +464,51 @@
             // 
             resources.ApplyResources(this.txt_sub2Y, "txt_sub2Y");
             this.txt_sub2Y.Name = "txt_sub2Y";
+            this.txt_sub2Y.TextChanged += new System.EventHandler(this.txt_sub2Y_TextChanged);
             this.txt_sub2Y.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_NumberFilter);
             // 
             // txt_sub2X
             // 
             resources.ApplyResources(this.txt_sub2X, "txt_sub2X");
             this.txt_sub2X.Name = "txt_sub2X";
+            this.txt_sub2X.TextChanged += new System.EventHandler(this.txt_sub2X_TextChanged);
             this.txt_sub2X.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_NumberFilter);
             // 
             // txt_sub1Y
             // 
             resources.ApplyResources(this.txt_sub1Y, "txt_sub1Y");
             this.txt_sub1Y.Name = "txt_sub1Y";
+            this.txt_sub1Y.TextChanged += new System.EventHandler(this.txt_sub1Y_TextChanged);
             this.txt_sub1Y.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_NumberFilter);
             // 
             // txt_sub1X
             // 
             resources.ApplyResources(this.txt_sub1X, "txt_sub1X");
             this.txt_sub1X.Name = "txt_sub1X";
+            this.txt_sub1X.TextChanged += new System.EventHandler(this.txt_sub1X_TextChanged);
             this.txt_sub1X.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_NumberFilter);
             // 
-            // label9
+            // btn_saveConfig
             // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
+            this.btn_saveConfig.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btn_saveConfig, "btn_saveConfig");
+            this.btn_saveConfig.Name = "btn_saveConfig";
+            this.btn_saveConfig.UseVisualStyleBackColor = true;
             // 
-            // cmb_FontStyle
+            // btn_loadConfig
             // 
-            this.cmb_FontStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_FontStyle.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_FontStyle, "cmb_FontStyle");
-            this.cmb_FontStyle.Name = "cmb_FontStyle";
+            this.btn_loadConfig.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btn_loadConfig, "btn_loadConfig");
+            this.btn_loadConfig.Name = "btn_loadConfig";
+            this.btn_loadConfig.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.group_Config);
+            this.Controls.Add(this.btn_loadConfig);
+            this.Controls.Add(this.btn_saveConfig);
+            this.Controls.Add(this.panel_renderConfig);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gp_render_mode);
             this.Controls.Add(this.btn_ScnStop);
@@ -482,6 +516,7 @@
             this.Controls.Add(this.btn_Clear_Fade);
             this.Controls.Add(this.lb_Status);
             this.Controls.Add(this.lst_SubTitle);
+            this.Controls.Add(this.btn_Lock_Font);
             this.Controls.Add(this.lst_File);
             this.Controls.Add(this.btn_DeleteFile);
             this.Controls.Add(this.btn_Clear_Cut);
@@ -507,8 +542,8 @@
             this.gp_render_mode.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.group_Config.ResumeLayout(false);
-            this.group_Config.PerformLayout();
+            this.panel_renderConfig.ResumeLayout(false);
+            this.panel_renderConfig.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -559,7 +594,7 @@
         private System.Windows.Forms.HScrollBar scroll_sub2X;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.HScrollBar scroll_sub1Y;
-        private System.Windows.Forms.GroupBox group_Config;
+        private System.Windows.Forms.GroupBox panel_renderConfig;
         private System.Windows.Forms.TextBox txt_sub2Y;
         private System.Windows.Forms.TextBox txt_sub2X;
         private System.Windows.Forms.TextBox txt_sub1Y;
@@ -568,8 +603,11 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.HScrollBar scroll_fontSize;
         private System.Windows.Forms.Button btn_sync_sub2X;
+        private System.Windows.Forms.TextBox txt_fadeTime;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox cmb_FontStyle;
+        private System.Windows.Forms.HScrollBar scroll_fadeTime;
+        private System.Windows.Forms.Button btn_saveConfig;
+        private System.Windows.Forms.Button btn_loadConfig;
     }
 }
 
