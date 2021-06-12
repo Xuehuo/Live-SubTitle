@@ -62,8 +62,6 @@ namespace NDI_SubTitle
             if (alpha > Alpha_Max)
                 solidBrushes.Add(new SolidBrush(Color.FromArgb(Alpha_Max, config.Default_Color)));
 
-
-
         }
 
         private int height;
@@ -117,20 +115,19 @@ namespace NDI_SubTitle
             }
         }
 
-        public void ChangeFont(FontFamily font)
+        public void ChangeFont(FontFamily font, FontStyle fontStyle = FontStyle.Regular)
         {
             lock (syncLock)
-                this.font = new Font(font, Config.fontSize);
+                this.font = new Font(font, Config.fontSize, fontStyle);
+
             isChange = true;
         }
 
         public void onChanged(RenderConfig config)
         {
             lock (syncLock)
-            {
                 font = new Font(font.FontFamily, config.fontSize);
-                isChange = true;
-            }
+            isChange = true;
         }
 
         private void GenerateBmp()
@@ -184,7 +181,7 @@ namespace NDI_SubTitle
                     var brush = new SolidBrush(Color.FromArgb(alpha, Color.White));
                     graphics.DrawString(program.First_Sub, font, brush, Config.Point_Sub1);
                     graphics.DrawString(program.Second_Sub, font, brush, Config.Point_Sub2);
-               }
+                }
                 else if (Fading_X >= Alpha_Max / 2)
                 {
                     // from empty to fading 
@@ -235,6 +232,7 @@ namespace NDI_SubTitle
         {
             if (isChange || isFading)
             {
+                Console.WriteLine("Rerender");
                 lock (syncLock)
                 {
                     GenerateBmp();
@@ -260,6 +258,12 @@ namespace NDI_SubTitle
                 isChange = false;
             }
             SwapBuffers();
+        }
+
+        protected override void OnKeyPress(KeyPressEventArgs e)
+        {
+            Console.WriteLine("On Key Press in openTK");
+            base.OnKeyPress(e);
         }
 
     }

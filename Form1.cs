@@ -37,10 +37,11 @@ namespace NDI_SubTitle
 
         SubTitle Previewing = SubTitle.Empty;
 
-        JObject Config;
-        RenderConfig NDI_Config;
+        RenderConfig renderConfig;
         NDIRender Renderer;
         CancellationTokenSource cancelNDI;
+
+        FontFamily fontFamily;
 
 
         //Screen Output
@@ -51,7 +52,10 @@ namespace NDI_SubTitle
         #region Form
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.AutoScaleMode = AutoScaleMode.Dpi;
             // Init Fonts
+            cmb_Fonts.Items.Clear();
+            cmb_Fonts.Items.Add("[Select Font File]");
             using (InstalledFontCollection fontsCollection = new InstalledFontCollection())
             {
                 FontFamily[] fontFamilies = fontsCollection.Families;
@@ -67,26 +71,71 @@ namespace NDI_SubTitle
             var config_path = Path.Combine(Directory.GetCurrentDirectory(), "NDI-SubTitle.config");
             try
             {
-                Config = JObject.Parse(File.ReadAllText(config_path));
-                if (Config.ContainsKey("NDI"))
-                    NDI_Config = RenderConfig.ReadNDIConfig(Config["NDI"] as JObject);
+                JObject config;
+                config = JObject.Parse(File.ReadAllText(config_path));
+                if (config.ContainsKey("NDI"))
+                    renderConfig = RenderConfig.ReadNDIConfig(config["NDI"] as JObject);
                 else
-                    NDI_Config = new RenderConfig(true);
-                if (Config.ContainsKey("Font-Size"))
-                    NDI_Config.fontSize = Convert.ToSingle(Config["Font-Size"].ToString());
+                    renderConfig = new RenderConfig(true);
+                if (config.ContainsKey("Font-Size"))
+                    renderConfig.fontSize = Convert.ToSingle(config["Font-Size"].ToString());
                 else
-                    NDI_Config.fontSize = 50;
+                    renderConfig.fontSize = 50;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Reading Config File Failed");
                 Console.WriteLine(ex.ToString());
-                NDI_Config = new RenderConfig(true);
-                NDI_Config.fontSize = 50;
+                renderConfig = new RenderConfig(true);
+                renderConfig.fontSize = 50;
             }
-            scroll_fontSize.Value = (int)NDI_Config.fontSize;
-
+            // set Value for UI
+            scroll_fontSize.Value = (int)renderConfig.fontSize * 10;
+            txt_sub1X.Text = (scroll_sub1X.Value = renderConfig.Point_Sub1.X).ToString();
+            txt_sub1Y.Text = (scroll_sub1Y.Value = renderConfig.Point_Sub1.Y).ToString();
+            txt_sub2X.Text = (scroll_sub2X.Value = renderConfig.Point_Sub2.X).ToString();
+            txt_sub2Y.Text = (scroll_sub2Y.Value = renderConfig.Point_Sub2.Y).ToString();
+            const string DEBUG_LYRICS_FILENAME = "test-lyrics.txt";
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), DEBUG_LYRICS_FILENAME);
+            if (File.Exists(filePath))
+            {
+                Console.WriteLine("detect test-lyrics file, load now");
+                lst_File.Items.Add(DEBUG_LYRICS_FILENAME);
+                ST_Files.Add(DEBUG_LYRICS_FILENAME, filePath);
+                lst_File.SelectedIndex = 0;
+                btn_Load_Click(null, null);
+            }
         }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            var keyData = e.KeyData;
+            if (keyData == (Keys.Control | Keys.Space))
+            {   //Fade to Blank
+                Console.WriteLine("ShortCut: Ctrl + Space");
+                btn_Clear_Fade_Click();
+                e.Handled = true;
+            }
+            else if (keyData == (Keys.Control | Keys.Enter))
+            {   //Cut to Blank
+                Console.WriteLine("ShortCut: Ctrl + Enter");
+                btn_Clear_Click();
+                e.Handled = true;
+            }
+            else if (keyData == Keys.Space)
+            {   // Fade
+                Console.WriteLine("ShortCut: Space");
+                btn_fade_Click();
+                e.Handled = true;
+            }
+            else if (keyData == Keys.Enter)
+            {   //fade to blank
+                Console.WriteLine("ShortCut: Enter");
+                btn_Hard_Click();
+                e.Handled = true;
+            }
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.Control | Keys.Space))
@@ -159,8 +208,13 @@ namespace NDI_SubTitle
         {
             if (Renderer != null)
                 return;
+            if(fontFamily == null)
+            {
+                MessageBox.Show("Please select font");
+                return;
+            }
             cancelNDI = new CancellationTokenSource();
-            Renderer = new NDIRender(cancelNDI.Token, NDI_Config, new Font(new FontFamily(cmb_Fonts.SelectedItem.ToString()), NDI_Config.fontSize));
+            Renderer = new NDIRender(cancelNDI.Token, renderConfig, fontFamily);
             Task.Run(async () => await Renderer.Run());
             lb_Status.ForeColor = Color.Green;
             lb_Status.Text = "NDI On";
@@ -266,14 +320,44 @@ namespace NDI_SubTitle
             if (cmb.SelectedItem != null)
             {
                 Console.WriteLine("Change Font To " + cmb.SelectedItem.ToString());
+                if (cmb.SelectedItem.ToString().Contains("Select Font File"))
+                {
+                    var ofd = new OpenFileDialog();
+                    //   ofd.Reset();
+                    ofd.Filter = "Font File (*.otf, *.ttf)|*.otf;*.ttf|All Files|*.*";
+                    ofd.ValidateNames = true;
+                    ofd.CheckPathExists = true;
+                    ofd.CheckFileExists = true;
+                    ofd.Multiselect = false;
+                    if (ofd.ShowDialog(this) == DialogResult.OK)
+                    {
+                        foreach (var filePath in ofd.FileNames)
+                        {
+                            if (File.Exists(filePath))
+                            {
+                                PrivateFontCollection collection = new PrivateFontCollection();
+                                collection.AddFontFile(filePath);
+                                fontFamily = new FontFamily(collection.Families[0].Name, collection);
+                                if (render_mode == RenderMode.FullScreen)
+                                {
+                                    if (render_form != null)
+                                        render_form.ChangeFont(fontFamily);
+                                }
+                            }
+                        }
+                    }
+                    ofd.Dispose();
+                    return;
+                }
+                fontFamily = new FontFamily(cmb.SelectedItem.ToString());
                 //Render_Font = new Font(new FontFamily(cmb.SelectedItem.ToString()), 50);
                 if (render_mode == RenderMode.FullScreen)
                 {
                     if (render_form != null)
-                        render_form.ChangeFont(new FontFamily(cmb.SelectedItem.ToString()));
+                        render_form.ChangeFont(fontFamily);
                 }
                 else if (Renderer != null)
-                    Renderer.ChangeFont(new Font(new FontFamily(cmb.SelectedItem.ToString()), NDI_Config.fontSize));
+                    Renderer.ChangeFont(fontFamily);
             }
         }
 
@@ -431,7 +515,7 @@ namespace NDI_SubTitle
         {
             if (cmb_monitor.Enabled == false) //has locked
             {
-                render_form = new Render_Form(display_screen, scn_width, scn_height, new Font(new FontFamily(cmb_Fonts.SelectedItem.ToString()), NDI_Config.fontSize), NDI_Config);
+                render_form = new Render_Form(display_screen, scn_width, scn_height, new Font(new FontFamily(cmb_Fonts.SelectedItem.ToString()), renderConfig.fontSize), renderConfig);
                 render_form.Run(50.0f, 50.0f);
             }
             else
@@ -468,43 +552,63 @@ namespace NDI_SubTitle
 
         }
 
-        private void scroll_sub1X_Scroll(object sender, ScrollEventArgs e)
-        {
-            NDI_Config.Point_Sub1.X = e.NewValue;
-            txt_sub1X.Text = e.NewValue + ""; NotifyChanges();
-        }
-
-        private void scroll_sub1Y_Scroll(object sender, ScrollEventArgs e)
-        {
-            NDI_Config.Point_Sub1.Y = e.NewValue;
-            txt_sub1Y.Text = e.NewValue + ""; NotifyChanges();
-        }
-        private void hScrollBar3_Scroll(object sender, ScrollEventArgs e)
-        {
-            NDI_Config.Point_Sub2.X = e.NewValue;
-            txt_sub2X.Text = e.NewValue + ""; NotifyChanges();
-        }
-
-        private void hScrollBar4_Scroll(object sender, ScrollEventArgs e)
-        {
-            NDI_Config.Point_Sub2.Y = e.NewValue;
-            txt_sub2Y.Text = e.NewValue + ""; NotifyChanges();
-        }
-
         private void NotifyChanges()
         {
             if (render_mode == RenderMode.FullScreen)
             {
                 if (render_form != null)
-                    render_form.onChanged(NDI_Config);
+                    render_form.onChanged(renderConfig);
             }
         }
 
         private void scroll_fontSize_Scroll(object sender, ScrollEventArgs e)
         {
-            NDI_Config.fontSize = e.NewValue / 10.0f;
-            txt_fontSize.Text = e.NewValue / 10.0f + "";
+            renderConfig.fontSize = e.NewValue / 10.0f;
+            txt_fontSize.Text = (e.NewValue / 10.0f).ToString();
             NotifyChanges();
+        }
+
+        private void scroll_sub1X_ValueChanged(object sender, EventArgs e)
+        {
+            renderConfig.Point_Sub1.X = scroll_sub1X.Value;
+            txt_sub1X.Text = scroll_sub1X.Value.ToString();
+            NotifyChanges();
+        }
+
+        private void scroll_sub1Y_ValueChanged(object sender, EventArgs e)
+        {
+            renderConfig.Point_Sub1.Y = scroll_sub1Y.Value;
+            txt_sub1Y.Text = scroll_sub1Y.Value.ToString();
+            NotifyChanges();
+        }
+
+        private void scroll_sub2X_ValueChanged(object sender, EventArgs e)
+        {
+            renderConfig.Point_Sub2.X = scroll_sub2X.Value;
+            txt_sub2X.Text = scroll_sub2X.Value.ToString();
+            NotifyChanges();
+        }
+
+        private void scroll_sub2Y_ValueChanged(object sender, EventArgs e)
+        {
+            renderConfig.Point_Sub2.Y = scroll_sub2Y.Value;
+            txt_sub2Y.Text = scroll_sub2Y.Value.ToString();
+            NotifyChanges();
+        }
+
+        private void btn_sync_sub2X_Click(object sender, EventArgs e)
+        {
+            renderConfig.Point_Sub2.X = renderConfig.Point_Sub1.X;
+            txt_sub2X.Text = txt_sub1X.Text;
+            scroll_sub2X.Value = scroll_sub1X.Value;
+        }
+
+        private void txt_NumberFilter(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         // TODO: Add lock
@@ -526,12 +630,21 @@ namespace NDI_SubTitle
                 cmb_monitor.Enabled = false;
                 btn_lock_screen.Text = "Locked";
                 btn_lock_screen.ForeColor = Color.Green;
+
+                txt_screen_height.ReadOnly = true;
+                txt_screen_width.ReadOnly = true;
+
+                scroll_sub1X.Maximum = scroll_sub2X.Maximum = Convert.ToInt32(txt_screen_width.Text);
+                scroll_sub1Y.Maximum = scroll_sub2Y.Maximum = Convert.ToInt32(txt_screen_height.Text);
             }
             else
             {
                 cmb_monitor.Enabled = true;
                 btn_lock_screen.Text = "Unlocked";
                 btn_lock_screen.ForeColor = Color.Red;
+
+                txt_screen_height.ReadOnly = false;
+                txt_screen_width.ReadOnly = false;
             }
         }
 

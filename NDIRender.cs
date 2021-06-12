@@ -31,9 +31,12 @@ namespace NDI_SubTitle
         private int Fading_X;
         private readonly int delta_X;
 
-        public NDIRender(CancellationToken cancellationToken, RenderConfig config, Font font)
+        private RenderConfig config;
+
+        public NDIRender(CancellationToken cancellationToken, RenderConfig config, FontFamily fontFamily)
         {
             this.cancellationToken = cancellationToken;
+            this.config = config;
 
             // We are going to create a 1920x180 frame at 50p, progressive (default).
             this.videoFrame = new VideoFrame(config.Width, config.Height, config.aspectRatio, config.frameRateNumerator, config.frameRateDenominator);
@@ -47,7 +50,7 @@ namespace NDI_SubTitle
 
             // Style
             defaultBrush = new SolidBrush(config.Default_Color);
-            this.font = font;
+            font = new Font(fontFamily, config.fontSize);
 
             // Fade Setting
             isFading = false;
@@ -85,10 +88,10 @@ namespace NDI_SubTitle
             }
         }
 
-        public void ChangeFont(Font font)
+        public void ChangeFont(FontFamily fontFamily)
         {
             lock (syncLock)
-                this.font = font;
+                font = new Font(fontFamily, config.fontSize);
         }
 
         private void DrawFrame()
