@@ -108,62 +108,53 @@ namespace NDI_SubTitle
             }
         }
 
+        private bool handleShortCut(Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.ProcessKey) || keyData == (Keys.Control | Keys.Space))
+            {   //Fade to Blank
+                Console.WriteLine("ShortCut: Ctrl + Space");
+                btn_Clear_Fade_Click();
+                return true;
+            }
+            else if (keyData == (Keys.Control | Keys.Enter))
+            {   //Cut to Blank
+                Console.WriteLine("ShortCut: Ctrl + Enter");
+                btn_Clear_Click();
+                return true;
+            }
+            else if (keyData == Keys.Space)
+            {   // Fade
+                Console.WriteLine("ShortCut: Space");
+                btn_fade_Click();
+                return true;
+            }
+            else if (keyData == Keys.Enter)
+            {   //fade to blank
+                Console.WriteLine("ShortCut: Enter");
+                btn_Hard_Click();
+                return true;
+            }
+            else if (keyData == Keys.Up)
+            {
+                if (lst_SubTitle.SelectedIndex - 1 >= 0)
+                    lst_SubTitle.SelectedIndex--;
+                return true;
+            }
+            else if (keyData == Keys.Down)
+            {
+                if (lst_SubTitle.SelectedIndex + 1 < lst_SubTitle.Items.Count)
+                    lst_SubTitle.SelectedIndex++;
+                return true;
+            }
+            return false;
+        }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            var keyData = e.KeyData;
-            if (keyData == (Keys.Control | Keys.ProcessKey))
-            {   //Fade to Blank
-                Console.WriteLine("ShortCut: Ctrl + Space");
-                btn_Clear_Fade_Click();
-                e.Handled = true;
-            }
-            else if (keyData == (Keys.Control | Keys.Enter))
-            {   //Cut to Blank
-                Console.WriteLine("ShortCut: Ctrl + Enter");
-                btn_Clear_Click();
-                e.Handled = true;
-            }
-            else if (keyData == Keys.Space)
-            {   // Fade
-                Console.WriteLine("ShortCut: Space");
-                btn_fade_Click();
-                e.Handled = true;
-            }
-            else if (keyData == Keys.Enter)
-            {   //fade to blank
-                Console.WriteLine("ShortCut: Enter");
-                btn_Hard_Click();
-                e.Handled = true;
-            }
+            e.Handled = handleShortCut(e.KeyData);
         }
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == (Keys.Control | Keys.Space))
-            {   //Fade to Blank
-                Console.WriteLine("ShortCut: Ctrl + Space");
-                btn_Clear_Fade_Click();
-                return true;
-            }
-            else if (keyData == (Keys.Control | Keys.Enter))
-            {   //Cut to Blank
-                Console.WriteLine("ShortCut: Ctrl + Enter");
-                btn_Clear_Click();
-                return true;
-            }
-            else if (keyData == Keys.Space)
-            {   // Fade
-                Console.WriteLine("ShortCut: Space");
-                btn_fade_Click();
-                return true;
-            }
-            else if (keyData == Keys.Enter)
-            {   //fade to blank
-                Console.WriteLine("ShortCut: Enter");
-                btn_Hard_Click();
-                return true;
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
+            return handleShortCut(keyData) || base.ProcessCmdKey(ref msg, keyData);
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
