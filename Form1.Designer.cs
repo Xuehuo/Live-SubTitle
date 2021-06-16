@@ -74,6 +74,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.scroll_sub2Y = new System.Windows.Forms.HScrollBar();
             this.panel_renderConfig = new System.Windows.Forms.GroupBox();
+            this.txt_profileRemarks = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label_currentFont = new System.Windows.Forms.Label();
             this.txt_fadeTime = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.scroll_fadeTime = new System.Windows.Forms.HScrollBar();
@@ -85,11 +88,25 @@
             this.txt_sub2X = new System.Windows.Forms.TextBox();
             this.txt_sub1Y = new System.Windows.Forms.TextBox();
             this.txt_sub1X = new System.Windows.Forms.TextBox();
-            this.btn_saveConfig = new System.Windows.Forms.Button();
-            this.btn_loadConfig = new System.Windows.Forms.Button();
+            this.btn_savePreset1 = new System.Windows.Forms.Button();
+            this.btn_loadPreset1 = new System.Windows.Forms.Button();
+            this.btn_loadPreset2 = new System.Windows.Forms.Button();
+            this.btn_savePreset2 = new System.Windows.Forms.Button();
+            this.btn_loadPreset3 = new System.Windows.Forms.Button();
+            this.btn_savePreset3 = new System.Windows.Forms.Button();
+            this.btn_loadPreset4 = new System.Windows.Forms.Button();
+            this.btn_savePreset4 = new System.Windows.Forms.Button();
+            this.btn_loadPreset5 = new System.Windows.Forms.Button();
+            this.btn_savePreset5 = new System.Windows.Forms.Button();
+            this.btn_lockSavePreset = new System.Windows.Forms.Button();
+            this.btn_lockLoadPreset = new System.Windows.Forms.Button();
+            this.panel_presets = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label_presetRemarks = new System.Windows.Forms.Label();
             this.gp_render_mode.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel_renderConfig.SuspendLayout();
+            this.panel_presets.SuspendLayout();
             this.SuspendLayout();
             // 
             // lb_program_file
@@ -387,6 +404,9 @@
             // panel_renderConfig
             // 
             resources.ApplyResources(this.panel_renderConfig, "panel_renderConfig");
+            this.panel_renderConfig.Controls.Add(this.txt_profileRemarks);
+            this.panel_renderConfig.Controls.Add(this.label10);
+            this.panel_renderConfig.Controls.Add(this.label_currentFont);
             this.panel_renderConfig.Controls.Add(this.txt_fadeTime);
             this.panel_renderConfig.Controls.Add(this.label9);
             this.panel_renderConfig.Controls.Add(this.scroll_fadeTime);
@@ -410,6 +430,22 @@
             this.panel_renderConfig.Controls.Add(this.label5);
             this.panel_renderConfig.Name = "panel_renderConfig";
             this.panel_renderConfig.TabStop = false;
+            // 
+            // txt_profileRemarks
+            // 
+            resources.ApplyResources(this.txt_profileRemarks, "txt_profileRemarks");
+            this.txt_profileRemarks.Name = "txt_profileRemarks";
+            this.txt_profileRemarks.TextChanged += new System.EventHandler(this.txt_profileRemarks_TextChanged);
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            // 
+            // label_currentFont
+            // 
+            resources.ApplyResources(this.label_currentFont, "label_currentFont");
+            this.label_currentFont.Name = "label_currentFont";
             // 
             // txt_fadeTime
             // 
@@ -488,26 +524,137 @@
             this.txt_sub1X.TextChanged += new System.EventHandler(this.txt_sub1X_TextChanged);
             this.txt_sub1X.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_NumberFilter);
             // 
-            // btn_saveConfig
+            // btn_savePreset1
             // 
-            resources.ApplyResources(this.btn_saveConfig, "btn_saveConfig");
-            this.btn_saveConfig.ForeColor = System.Drawing.Color.Black;
-            this.btn_saveConfig.Name = "btn_saveConfig";
-            this.btn_saveConfig.UseVisualStyleBackColor = true;
+            this.btn_savePreset1.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btn_savePreset1, "btn_savePreset1");
+            this.btn_savePreset1.Name = "btn_savePreset1";
+            this.btn_savePreset1.UseVisualStyleBackColor = true;
+            this.btn_savePreset1.Click += new System.EventHandler(this.btn_savePreset_Click);
             // 
-            // btn_loadConfig
+            // btn_loadPreset1
             // 
-            resources.ApplyResources(this.btn_loadConfig, "btn_loadConfig");
-            this.btn_loadConfig.ForeColor = System.Drawing.Color.Black;
-            this.btn_loadConfig.Name = "btn_loadConfig";
-            this.btn_loadConfig.UseVisualStyleBackColor = true;
+            this.btn_loadPreset1.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btn_loadPreset1, "btn_loadPreset1");
+            this.btn_loadPreset1.Name = "btn_loadPreset1";
+            this.btn_loadPreset1.UseVisualStyleBackColor = true;
+            this.btn_loadPreset1.Click += new System.EventHandler(this.btn_loadPreset_Click);
+            // 
+            // btn_loadPreset2
+            // 
+            this.btn_loadPreset2.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btn_loadPreset2, "btn_loadPreset2");
+            this.btn_loadPreset2.Name = "btn_loadPreset2";
+            this.btn_loadPreset2.UseVisualStyleBackColor = true;
+            this.btn_loadPreset2.Click += new System.EventHandler(this.btn_loadPreset_Click);
+            // 
+            // btn_savePreset2
+            // 
+            this.btn_savePreset2.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btn_savePreset2, "btn_savePreset2");
+            this.btn_savePreset2.Name = "btn_savePreset2";
+            this.btn_savePreset2.UseVisualStyleBackColor = true;
+            this.btn_savePreset2.Click += new System.EventHandler(this.btn_savePreset_Click);
+            // 
+            // btn_loadPreset3
+            // 
+            this.btn_loadPreset3.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btn_loadPreset3, "btn_loadPreset3");
+            this.btn_loadPreset3.Name = "btn_loadPreset3";
+            this.btn_loadPreset3.UseVisualStyleBackColor = true;
+            this.btn_loadPreset3.Click += new System.EventHandler(this.btn_loadPreset_Click);
+            // 
+            // btn_savePreset3
+            // 
+            this.btn_savePreset3.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btn_savePreset3, "btn_savePreset3");
+            this.btn_savePreset3.Name = "btn_savePreset3";
+            this.btn_savePreset3.UseVisualStyleBackColor = true;
+            this.btn_savePreset3.Click += new System.EventHandler(this.btn_savePreset_Click);
+            // 
+            // btn_loadPreset4
+            // 
+            this.btn_loadPreset4.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btn_loadPreset4, "btn_loadPreset4");
+            this.btn_loadPreset4.Name = "btn_loadPreset4";
+            this.btn_loadPreset4.UseVisualStyleBackColor = true;
+            this.btn_loadPreset4.Click += new System.EventHandler(this.btn_loadPreset_Click);
+            // 
+            // btn_savePreset4
+            // 
+            this.btn_savePreset4.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btn_savePreset4, "btn_savePreset4");
+            this.btn_savePreset4.Name = "btn_savePreset4";
+            this.btn_savePreset4.UseVisualStyleBackColor = true;
+            this.btn_savePreset4.Click += new System.EventHandler(this.btn_savePreset_Click);
+            // 
+            // btn_loadPreset5
+            // 
+            this.btn_loadPreset5.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btn_loadPreset5, "btn_loadPreset5");
+            this.btn_loadPreset5.Name = "btn_loadPreset5";
+            this.btn_loadPreset5.UseVisualStyleBackColor = true;
+            this.btn_loadPreset5.Click += new System.EventHandler(this.btn_loadPreset_Click);
+            // 
+            // btn_savePreset5
+            // 
+            this.btn_savePreset5.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btn_savePreset5, "btn_savePreset5");
+            this.btn_savePreset5.Name = "btn_savePreset5";
+            this.btn_savePreset5.UseVisualStyleBackColor = true;
+            this.btn_savePreset5.Click += new System.EventHandler(this.btn_savePreset_Click);
+            // 
+            // btn_lockSavePreset
+            // 
+            resources.ApplyResources(this.btn_lockSavePreset, "btn_lockSavePreset");
+            this.btn_lockSavePreset.ForeColor = System.Drawing.Color.Red;
+            this.btn_lockSavePreset.Name = "btn_lockSavePreset";
+            this.btn_lockSavePreset.UseVisualStyleBackColor = true;
+            this.btn_lockSavePreset.Click += new System.EventHandler(this.btn_lockSavePreset_Click);
+            // 
+            // btn_lockLoadPreset
+            // 
+            resources.ApplyResources(this.btn_lockLoadPreset, "btn_lockLoadPreset");
+            this.btn_lockLoadPreset.ForeColor = System.Drawing.Color.Red;
+            this.btn_lockLoadPreset.Name = "btn_lockLoadPreset";
+            this.btn_lockLoadPreset.UseVisualStyleBackColor = true;
+            this.btn_lockLoadPreset.Click += new System.EventHandler(this.btn_lockLoadPreset_Click);
+            // 
+            // panel_presets
+            // 
+            resources.ApplyResources(this.panel_presets, "panel_presets");
+            this.panel_presets.Controls.Add(this.btn_loadPreset1);
+            this.panel_presets.Controls.Add(this.btn_savePreset5);
+            this.panel_presets.Controls.Add(this.btn_loadPreset5);
+            this.panel_presets.Controls.Add(this.btn_savePreset4);
+            this.panel_presets.Controls.Add(this.btn_savePreset1);
+            this.panel_presets.Controls.Add(this.btn_loadPreset3);
+            this.panel_presets.Controls.Add(this.btn_savePreset2);
+            this.panel_presets.Controls.Add(this.btn_loadPreset4);
+            this.panel_presets.Controls.Add(this.btn_savePreset3);
+            this.panel_presets.Controls.Add(this.btn_loadPreset2);
+            this.panel_presets.Name = "panel_presets";
+            this.panel_presets.TabStop = false;
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
+            // 
+            // label_presetRemarks
+            // 
+            resources.ApplyResources(this.label_presetRemarks, "label_presetRemarks");
+            this.label_presetRemarks.Name = "label_presetRemarks";
             // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btn_loadConfig);
-            this.Controls.Add(this.btn_saveConfig);
+            this.Controls.Add(this.label_presetRemarks);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.panel_presets);
+            this.Controls.Add(this.btn_lockLoadPreset);
+            this.Controls.Add(this.btn_lockSavePreset);
             this.Controls.Add(this.panel_renderConfig);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gp_render_mode);
@@ -544,6 +691,7 @@
             this.groupBox1.PerformLayout();
             this.panel_renderConfig.ResumeLayout(false);
             this.panel_renderConfig.PerformLayout();
+            this.panel_presets.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -606,8 +754,24 @@
         private System.Windows.Forms.TextBox txt_fadeTime;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.HScrollBar scroll_fadeTime;
-        private System.Windows.Forms.Button btn_saveConfig;
-        private System.Windows.Forms.Button btn_loadConfig;
+        private System.Windows.Forms.Button btn_savePreset1;
+        private System.Windows.Forms.Button btn_loadPreset1;
+        private System.Windows.Forms.Label label_currentFont;
+        private System.Windows.Forms.Button btn_loadPreset5;
+        private System.Windows.Forms.Button btn_savePreset5;
+        private System.Windows.Forms.Button btn_loadPreset4;
+        private System.Windows.Forms.Button btn_savePreset4;
+        private System.Windows.Forms.Button btn_loadPreset3;
+        private System.Windows.Forms.Button btn_savePreset3;
+        private System.Windows.Forms.Button btn_loadPreset2;
+        private System.Windows.Forms.Button btn_savePreset2;
+        private System.Windows.Forms.Button btn_lockSavePreset;
+        private System.Windows.Forms.Button btn_lockLoadPreset;
+        private System.Windows.Forms.TextBox txt_profileRemarks;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox panel_presets;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label_presetRemarks;
     }
 }
 

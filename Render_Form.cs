@@ -44,24 +44,14 @@ namespace NDI_SubTitle
             isFading = false;
             // For delta_X, We plus delta_X into alpha
             // Fade Effect will last for 500ms 
-            // So every frame it will change 255/(50frames/2steps) = 10
-            delta_X = Alpha_Max / (config.frameRateNumerator / config.frameRateDenominator) * 2;
+            // So every frame it will change 255/( ) = 10
+            delta_X = Alpha_Max / ((config.frameRateNumerator / config.frameRateDenominator) * config.Fade_Time / 1000);
 
             // If Fading_X <  Alpha_Max / 2 ,it's the former part (from program to empty)
             // If Fading_X >= Alpha_Max / 2 ,it's the latter part (from empty to fading )
             // If Fading_X >= Alpha_Max     ,it means fade ends   (set program as fading)
 
             Fading_X = 0;
-
-            solidBrushes = new List<SolidBrush>();
-            int alpha = Alpha_Min;
-            for (; alpha < Alpha_Max; alpha += delta_X)
-            {
-                solidBrushes.Add(new SolidBrush(Color.FromArgb(alpha, config.Default_Color)));
-            }
-            if (alpha > Alpha_Max)
-                solidBrushes.Add(new SolidBrush(Color.FromArgb(Alpha_Max, config.Default_Color)));
-
         }
 
         private int height;
@@ -84,9 +74,7 @@ namespace NDI_SubTitle
         private SubTitle fading;
         private bool isFading;
         private int Fading_X;
-        private readonly int delta_X;
-        private List<SolidBrush> solidBrushes;
-        private int fadeBrushIndex = 0;
+        private int delta_X;
 
         private bool isChange = false;
 
@@ -127,6 +115,8 @@ namespace NDI_SubTitle
         {
             lock (syncLock)
                 font = new Font(font.FontFamily, config.fontSize);
+            delta_X = Alpha_Max / ((Config.frameRateNumerator / Config.frameRateDenominator) * config.Fade_Time / 1000);
+
             isChange = true;
         }
 
@@ -178,7 +168,7 @@ namespace NDI_SubTitle
                     int alpha = Alpha_Max - Fading_X * 2;
                     if (alpha < 0)
                         alpha = 0;
-                    var brush = new SolidBrush(Color.FromArgb(alpha, Color.White));
+                    var brush = new SolidBrush(Color.FromArgb(alpha, Config.Default_Color));
                     graphics.DrawString(program.First_Sub, font, brush, Config.Point_Sub1);
                     graphics.DrawString(program.Second_Sub, font, brush, Config.Point_Sub2);
                 }
@@ -190,7 +180,7 @@ namespace NDI_SubTitle
                     int alpha = Fading_X * 2 - Alpha_Max;
                     if (alpha > 255)
                         alpha = 255;
-                    var brush = new SolidBrush(Color.FromArgb(alpha, Color.White));
+                    var brush = new SolidBrush(Color.FromArgb(alpha, Config.Default_Color));
                     graphics.DrawString(fading.First_Sub, font, brush, Config.Point_Sub1);
                     graphics.DrawString(fading.Second_Sub, font, brush, Config.Point_Sub2);
                 }

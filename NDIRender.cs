@@ -29,14 +29,14 @@ namespace NDI_SubTitle
         private SubTitle fading;
         private bool isFading;
         private int Fading_X;
-        private readonly int delta_X;
+        private int delta_X;
 
-        private RenderConfig config;
+        private RenderConfig Config;
 
         public NDIRender(CancellationToken cancellationToken, RenderConfig config, FontFamily fontFamily)
         {
             this.cancellationToken = cancellationToken;
-            this.config = config;
+            this.Config = config;
 
             // We are going to create a 1920x180 frame at 50p, progressive (default).
             this.videoFrame = new VideoFrame(config.Width, config.Height, config.aspectRatio, config.frameRateNumerator, config.frameRateDenominator);
@@ -91,7 +91,7 @@ namespace NDI_SubTitle
         public void ChangeFont(FontFamily fontFamily)
         {
             lock (syncLock)
-                font = new Font(fontFamily, config.fontSize);
+                font = new Font(fontFamily, Config.fontSize);
         }
 
         private void DrawFrame()
@@ -177,6 +177,13 @@ namespace NDI_SubTitle
                 sendInstance.Dispose();
                 return 0;
             } // Main
+        }
+
+        internal void onChanged(RenderConfig config)
+        {
+            lock (syncLock)
+                font = new Font(font.FontFamily, config.fontSize);
+            delta_X = Alpha_Max / ((Config.frameRateNumerator / Config.frameRateDenominator) * config.Fade_Time / 1000);
         }
     }
 }

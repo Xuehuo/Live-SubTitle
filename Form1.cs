@@ -71,16 +71,7 @@ namespace NDI_SubTitle
             var config_path = Path.Combine(Directory.GetCurrentDirectory(), "NDI-SubTitle.config");
             try
             {
-                JObject config;
-                config = JObject.Parse(File.ReadAllText(config_path));
-                if (config.ContainsKey("NDI"))
-                    renderConfig = RenderConfig.ReadNDIConfig(config["NDI"] as JObject);
-                else
-                    renderConfig = new RenderConfig(true);
-                if (config.ContainsKey("Font-Size"))
-                    renderConfig.fontSize = Convert.ToSingle(config["Font-Size"].ToString());
-                else
-                    renderConfig.fontSize = 50;
+                renderConfig = RenderConfig.ReadConfig(config_path);
             }
             catch (Exception ex)
             {
@@ -91,11 +82,14 @@ namespace NDI_SubTitle
             }
             // set Value for UI
             scroll_fontSize.Value = (int)renderConfig.fontSize * 10;
+            txt_fontSize.Text = renderConfig.fontSize.ToString();
             txt_sub1X.Text = (scroll_sub1X.Value = renderConfig.Point_Sub1.X).ToString();
             txt_sub1Y.Text = (scroll_sub1Y.Value = renderConfig.Point_Sub1.Y).ToString();
             txt_sub2X.Text = (scroll_sub2X.Value = renderConfig.Point_Sub2.X).ToString();
             txt_sub2Y.Text = (scroll_sub2Y.Value = renderConfig.Point_Sub2.Y).ToString();
             txt_fadeTime.Text = (scroll_fadeTime.Value = renderConfig.Fade_Time).ToString();
+            label_presetRemarks.Text = renderConfig.Remarks;
+            txt_profileRemarks.Text = renderConfig.Remarks;
             const string DEBUG_LYRICS_FILENAME = "test-lyrics.txt";
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), DEBUG_LYRICS_FILENAME);
             if (File.Exists(filePath))
@@ -331,19 +325,13 @@ namespace NDI_SubTitle
                                 collection.AddFontFile(filePath);
                                 fontFamily = new FontFamily(collection.Families[0].Name, collection);
                                 Console.WriteLine($"Change font to selected {fontFamily.Name} from path {filePath}");
-                                if (render_mode == RenderMode.FullScreen)
-                                {
-                                    if (render_form != null)
-                                        render_form.ChangeFont(fontFamily);
-                                }
                             }
                         }
                     }
                     ofd.Dispose();
-                    return;
                 }
-                fontFamily = new FontFamily(cmb.SelectedItem.ToString());
-                //Render_Font = new Font(new FontFamily(cmb.SelectedItem.ToString()), 50);
+                else
+                    fontFamily = new FontFamily(cmb.SelectedItem.ToString());
                 if (render_mode == RenderMode.FullScreen)
                 {
                     if (render_form != null)
@@ -351,6 +339,7 @@ namespace NDI_SubTitle
                 }
                 else if (Renderer != null)
                     Renderer.ChangeFont(fontFamily);
+                label_currentFont.Text = $"Current Font: {fontFamily.Name}";
             }
         }
 
@@ -361,7 +350,7 @@ namespace NDI_SubTitle
                 // lock it
                 panel_renderConfig.Enabled = false;
                 btn_Lock_Font.ForeColor = Color.Green;
-                btn_Lock_Font.Text = "Locked";
+                btn_Lock_Font.Text = "Render Control Panel - Locked";
             }
             else
             {
@@ -372,6 +361,14 @@ namespace NDI_SubTitle
             }
         }
         #endregion
+        private void btn_load_presets(object sender, EventArgs e)
+        {
+            
+        }
+        private void btn_save_presets(object sender, EventArgs e)
+        {
+
+        }
 
         #region Change Buttons
         private void btn_Clear_Fade_Click(object sender = null, EventArgs e = null)
@@ -508,7 +505,7 @@ namespace NDI_SubTitle
         {
             if (cmb_monitor.Enabled == false) //has locked
             {
-                render_form = new Render_Form(display_screen, scn_width, scn_height, new Font(new FontFamily(cmb_Fonts.SelectedItem.ToString()), renderConfig.fontSize), renderConfig);
+                render_form = new Render_Form(display_screen, scn_width, scn_height, new Font(fontFamily, renderConfig.fontSize), renderConfig);
                 render_form.Run(50.0f, 50.0f);
             }
             else
@@ -551,6 +548,10 @@ namespace NDI_SubTitle
             {
                 if (render_form != null)
                     render_form.onChanged(renderConfig);
+            } else
+            {
+                if (Renderer != null)
+                    Renderer.onChanged(renderConfig);
             }
         }
 
@@ -608,6 +609,7 @@ namespace NDI_SubTitle
         {
             renderConfig.Fade_Time = scroll_fadeTime.Value;
             txt_fadeTime.Text = scroll_fadeTime.Value.ToString();
+            NotifyChanges();
         }
 
         private void txt_sub1X_TextChanged(object sender, EventArgs e)
@@ -636,7 +638,14 @@ namespace NDI_SubTitle
 
         private void txt_fontSize_TextChanged(object sender, EventArgs e)
         {
-            renderConfig.fontSize = Convert.ToSingle(txt_fontSize.Text);
+            try
+            {
+                renderConfig.fontSize = Convert.ToSingle(txt_fontSize.Text);
+            }
+            catch (Exception ex)
+            {
+                renderConfig.fontSize = 5.0f;
+            }
             scroll_fontSize.Value = (int) renderConfig.fontSize * 10;
             NotifyChanges();
         }
@@ -644,6 +653,55 @@ namespace NDI_SubTitle
         private void txt_fadeTime_TextChanged(object sender, EventArgs e)
         {
             renderConfig.Fade_Time = scroll_fadeTime.Value = Convert.ToInt32(txt_fadeTime.Text);
+            NotifyChanges();
+        }
+
+        private void btn_lockSavePreset_Click(object sender, EventArgs e)
+        {
+            if (btn_savePreset1.Enabled)
+            {
+                btn_lockSavePreset.Text = "Save Preset - Locked";
+                btn_lockSavePreset.ForeColor = Color.Green;
+                btn_savePreset1.Enabled = false;
+                btn_savePreset2.Enabled = false;
+                btn_savePreset3.Enabled = false;
+                btn_savePreset4.Enabled = false;
+                btn_savePreset5.Enabled = false;
+            }
+            else
+            {
+                btn_lockSavePreset.Text = "Lock Save Preset";
+                btn_lockSavePreset.ForeColor = Color.Red;
+                btn_savePreset1.Enabled = true;
+                btn_savePreset2.Enabled = true;
+                btn_savePreset3.Enabled = true;
+                btn_savePreset4.Enabled = true;
+                btn_savePreset5.Enabled = true;
+            }
+        }
+
+        private void btn_lockLoadPreset_Click(object sender, EventArgs e)
+        {
+            if (btn_loadPreset1.Enabled)
+            {
+                btn_lockLoadPreset.Text = "Load Preset - Locked";
+                btn_lockLoadPreset.ForeColor = Color.Green;
+                btn_loadPreset1.Enabled = false;
+                btn_loadPreset2.Enabled = false;
+                btn_loadPreset3.Enabled = false;
+                btn_loadPreset4.Enabled = false;
+                btn_loadPreset5.Enabled = false;
+            }
+            else
+            {
+                btn_lockLoadPreset.Text = "Lock Load Preset";
+                btn_lockLoadPreset.ForeColor = Color.Red;
+                btn_loadPreset1.Enabled = true;
+                btn_loadPreset2.Enabled = true;
+                btn_loadPreset3.Enabled = true;
+                btn_loadPreset4.Enabled = true;
+                btn_loadPreset5.Enabled = true;
+            }
         }
 
         // TODO: Add lock
@@ -681,6 +739,87 @@ namespace NDI_SubTitle
                 txt_screen_height.ReadOnly = false;
                 txt_screen_width.ReadOnly = false;
             }
+        }
+
+        private void loadPreset(int number)
+        {
+            if (number < 1 || number > 5)
+                return;
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"NDI-SubTitle{number}.config");
+
+            RenderConfig config = RenderConfig.ReadConfig(filePath);
+
+            renderConfig.Point_Sub1.X = config.Point_Sub1.X;
+            renderConfig.Point_Sub1.Y = config.Point_Sub1.Y;
+            renderConfig.Point_Sub2.X = config.Point_Sub2.X;
+            renderConfig.Point_Sub2.Y = config.Point_Sub2.Y;
+
+            renderConfig.Default_Color = config.Default_Color;
+            renderConfig.fontSize = config.fontSize;
+            renderConfig.Fade_Time = config.Fade_Time;
+            renderConfig.Remarks = config.Remarks;
+
+            NotifyChanges();
+
+            scroll_fontSize.Value = (int)renderConfig.fontSize * 10;
+            txt_fontSize.Text = renderConfig.fontSize.ToString();
+            txt_sub1X.Text = (scroll_sub1X.Value = renderConfig.Point_Sub1.X).ToString();
+            txt_sub1Y.Text = (scroll_sub1Y.Value = renderConfig.Point_Sub1.Y).ToString();
+            txt_sub2X.Text = (scroll_sub2X.Value = renderConfig.Point_Sub2.X).ToString();
+            txt_sub2Y.Text = (scroll_sub2Y.Value = renderConfig.Point_Sub2.Y).ToString();
+            txt_fadeTime.Text = (scroll_fadeTime.Value = renderConfig.Fade_Time).ToString();
+            label_presetRemarks.Text = renderConfig.Remarks;
+            txt_profileRemarks.Text = renderConfig.Remarks;
+
+        }
+
+        private void savePreset(int number)
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"NDI-SubTitle{number}.config");
+            RenderConfig.SaveConfig(renderConfig, filePath);
+        }
+
+        private void btn_loadPreset_Click(object sender, EventArgs e)
+        {
+            if (!(sender is Button))
+                return;
+            var btn = (Button)sender;
+            if (!btn.Name.StartsWith("btn_loadPreset"))
+                return;
+            int number;
+            try
+            {
+                number = Convert.ToInt32(btn.Name.Replace("btn_loadPreset", ""));
+            }
+            catch(Exception ex)
+            {
+                return;
+            }
+            loadPreset(number);            
+        }
+
+        private void txt_profileRemarks_TextChanged(object sender, EventArgs e)
+        {
+            renderConfig.Remarks = txt_profileRemarks.Text;
+        }
+
+        private void btn_savePreset_Click(object sender, EventArgs e)
+        {
+            if (!(sender is Button))
+                return;
+            var btn = (Button)sender;
+            if (!btn.Name.StartsWith("btn_savePreset"))
+                return;
+            int number;
+            try
+            {
+                number = Convert.ToInt32(btn.Name.Replace("btn_savePreset", ""));
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+            savePreset(number);
         }
 
     }
