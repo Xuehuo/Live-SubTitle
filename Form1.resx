@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lb_program_file.Font" type="System.Drawing.Font, System.Drawing">
-    <value>宋体, 10pt</value>
+    <value>SimSun, 10pt</value>
   </data>
   <data name="lb_program_file.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 15</value>
@@ -201,7 +201,7 @@
     <value>True</value>
   </data>
   <data name="lable_text.Font" type="System.Drawing.Font, System.Drawing">
-    <value>宋体, 14pt</value>
+    <value>SimSun, 14pt</value>
   </data>
   <data name="lable_text.Location" type="System.Drawing.Point, System.Drawing">
     <value>304, 120</value>
@@ -231,7 +231,7 @@
     <value>True</value>
   </data>
   <data name="lb_selected_file.Font" type="System.Drawing.Font, System.Drawing">
-    <value>宋体, 10pt</value>
+    <value>SimSun, 10pt</value>
   </data>
   <data name="lb_selected_file.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 47</value>
@@ -309,7 +309,7 @@
     <value>True</value>
   </data>
   <data name="lb_pre_id.Font" type="System.Drawing.Font, System.Drawing">
-    <value>宋体, 20pt</value>
+    <value>SimSun, 20pt</value>
   </data>
   <data name="lb_pre_id.Location" type="System.Drawing.Point, System.Drawing">
     <value>1259, 163</value>
@@ -343,7 +343,7 @@
     <value>True</value>
   </data>
   <data name="lb_pgm_id.Font" type="System.Drawing.Font, System.Drawing">
-    <value>宋体, 20pt</value>
+    <value>SimSun, 20pt</value>
   </data>
   <data name="lb_pgm_id.Location" type="System.Drawing.Point, System.Drawing">
     <value>1258, 355</value>
@@ -373,7 +373,7 @@
     <value>True</value>
   </data>
   <data name="lb_preview.Font" type="System.Drawing.Font, System.Drawing">
-    <value>宋体, 14pt</value>
+    <value>SimSun, 14pt</value>
   </data>
   <data name="lb_preview.Location" type="System.Drawing.Point, System.Drawing">
     <value>1260, 213</value>
@@ -406,7 +406,7 @@
     <value>True</value>
   </data>
   <data name="lb_program.Font" type="System.Drawing.Font, System.Drawing">
-    <value>宋体, 14pt</value>
+    <value>SimSun, 14pt</value>
   </data>
   <data name="lb_program.Location" type="System.Drawing.Point, System.Drawing">
     <value>1261, 405</value>
@@ -436,7 +436,7 @@
     <value>Bottom, Left</value>
   </data>
   <data name="btn_fade.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1440, 561</value>
+    <value>1440, 487</value>
   </data>
   <data name="btn_fade.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 78</value>
@@ -463,7 +463,7 @@
     <value>Bottom, Left</value>
   </data>
   <data name="btn_Hard.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1265, 561</value>
+    <value>1265, 487</value>
   </data>
   <data name="btn_Hard.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 78</value>
@@ -490,7 +490,7 @@
     <value>Bottom, Left</value>
   </data>
   <data name="btn_Clear_Cut.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1265, 653</value>
+    <value>1265, 579</value>
   </data>
   <data name="btn_Clear_Cut.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 84</value>
@@ -547,7 +547,7 @@
     <value>13, 163</value>
   </data>
   <data name="lst_File.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 562</value>
+    <value>283, 472</value>
   </data>
   <data name="lst_File.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -568,7 +568,7 @@
     <value>Top, Bottom, Left</value>
   </data>
   <data name="lst_SubTitle.Font" type="System.Drawing.Font, System.Drawing">
-    <value>宋体, 12pt</value>
+    <value>SimSun, 12pt</value>
   </data>
   <data name="lst_SubTitle.ItemHeight" type="System.Int32, mscorlib">
     <value>24</value>
@@ -580,7 +580,7 @@
     <value>True</value>
   </data>
   <data name="lst_SubTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>941, 556</value>
+    <value>941, 460</value>
   </data>
   <data name="lst_SubTitle.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -601,7 +601,7 @@
     <value>True</value>
   </data>
   <data name="lb_Status.Font" type="System.Drawing.Font, System.Drawing">
-    <value>宋体, 14pt</value>
+    <value>SimSun, 14pt</value>
   </data>
   <data name="lb_Status.Location" type="System.Drawing.Point, System.Drawing">
     <value>413, 120</value>
@@ -631,7 +631,7 @@
     <value>True</value>
   </data>
   <data name="lb_Font.Font" type="System.Drawing.Font, System.Drawing">
-    <value>宋体, 10pt</value>
+    <value>SimSun, 10pt</value>
   </data>
   <data name="lb_Font.Location" type="System.Drawing.Point, System.Drawing">
     <value>49, 275</value>
@@ -682,7 +682,7 @@
     <value>Bottom, Left</value>
   </data>
   <data name="btn_Lock_Font.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1264, 1026</value>
+    <value>1264, 952</value>
   </data>
   <data name="btn_Lock_Font.Size" type="System.Drawing.Size, System.Drawing">
     <value>333, 36</value>
@@ -709,7 +709,7 @@
     <value>Bottom, Left</value>
   </data>
   <data name="btn_Clear_Fade.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1440, 653</value>
+    <value>1440, 579</value>
   </data>
   <data name="btn_Clear_Fade.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 84</value>
@@ -990,54 +990,6 @@
   <data name="&gt;&gt;btn_scnStart.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;rdo_Render_FullScreen.Name" xml:space="preserve">
-    <value>rdo_Render_FullScreen</value>
-  </data>
-  <data name="&gt;&gt;rdo_Render_FullScreen.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdo_Render_FullScreen.Parent" xml:space="preserve">
-    <value>gp_render_mode</value>
-  </data>
-  <data name="&gt;&gt;rdo_Render_FullScreen.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;rdo_Render_NDI.Name" xml:space="preserve">
-    <value>rdo_Render_NDI</value>
-  </data>
-  <data name="&gt;&gt;rdo_Render_NDI.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdo_Render_NDI.Parent" xml:space="preserve">
-    <value>gp_render_mode</value>
-  </data>
-  <data name="&gt;&gt;rdo_Render_NDI.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="gp_render_mode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 11</value>
-  </data>
-  <data name="gp_render_mode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 63</value>
-  </data>
-  <data name="gp_render_mode.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="gp_render_mode.Text" xml:space="preserve">
-    <value>Render Mode</value>
-  </data>
-  <data name="&gt;&gt;gp_render_mode.Name" xml:space="preserve">
-    <value>gp_render_mode</value>
-  </data>
-  <data name="&gt;&gt;gp_render_mode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gp_render_mode.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;gp_render_mode.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <data name="rdo_Render_FullScreen.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1091,6 +1043,30 @@
   </data>
   <data name="&gt;&gt;rdo_Render_NDI.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="gp_render_mode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>635, 11</value>
+  </data>
+  <data name="gp_render_mode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 63</value>
+  </data>
+  <data name="gp_render_mode.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="gp_render_mode.Text" xml:space="preserve">
+    <value>Render Mode</value>
+  </data>
+  <data name="&gt;&gt;gp_render_mode.Name" xml:space="preserve">
+    <value>gp_render_mode</value>
+  </data>
+  <data name="&gt;&gt;gp_render_mode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gp_render_mode.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gp_render_mode.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>873, 15</value>
@@ -1399,7 +1375,7 @@
     <value>True</value>
   </data>
   <data name="label_currentFont.Font" type="System.Drawing.Font, System.Drawing">
-    <value>宋体, 10pt</value>
+    <value>SimSun, 10pt</value>
   </data>
   <data name="label_currentFont.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1714,7 +1690,7 @@
     <value>15</value>
   </data>
   <data name="panel_renderConfig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 745</value>
+    <value>11, 671</value>
   </data>
   <data name="panel_renderConfig.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -2023,7 +1999,7 @@
     <value>NoControl</value>
   </data>
   <data name="btn_lockSavePreset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1265, 1068</value>
+    <value>1265, 994</value>
   </data>
   <data name="btn_lockSavePreset.Size" type="System.Drawing.Size, System.Drawing">
     <value>332, 36</value>
@@ -2053,7 +2029,7 @@
     <value>NoControl</value>
   </data>
   <data name="btn_lockLoadPreset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1266, 1113</value>
+    <value>1266, 1039</value>
   </data>
   <data name="btn_lockLoadPreset.Size" type="System.Drawing.Size, System.Drawing">
     <value>331, 36</value>
@@ -2080,7 +2056,7 @@
     <value>Bottom, Left</value>
   </data>
   <data name="panel_presets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1265, 756</value>
+    <value>1265, 682</value>
   </data>
   <data name="panel_presets.Size" type="System.Drawing.Size, System.Drawing">
     <value>332, 264</value>
@@ -2107,7 +2083,7 @@
     <value>True</value>
   </data>
   <data name="label11.Font" type="System.Drawing.Font, System.Drawing">
-    <value>宋体, 13pt</value>
+    <value>SimSun, 13pt</value>
   </data>
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>1264, 15</value>
@@ -2137,7 +2113,7 @@
     <value>True</value>
   </data>
   <data name="label_presetRemarks.Font" type="System.Drawing.Font, System.Drawing">
-    <value>宋体, 10pt</value>
+    <value>SimSun, 10pt</value>
   </data>
   <data name="label_presetRemarks.Location" type="System.Drawing.Point, System.Drawing">
     <value>1269, 55</value>
@@ -2169,8 +2145,14 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>9, 18</value>
   </data>
+  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>1639, 1106</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1617, 1180</value>
+    <value>1617, 1050</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Form1</value>
